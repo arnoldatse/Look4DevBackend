@@ -18,12 +18,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findFirstByEmailOrPseudo(username);
         if (user != null) {
-            /*List<UserRole> userRoles = user.getUserRoles();
-            ArrayList<String> roles = new ArrayList<>();
-            for (UserRole userRole : userRoles) {
-                roles.add(userRole.getRole().getName());
-            }*/
-
             String[] profiles = user.getUserProfiles()
                     .stream()
                     .map(UserProfileSimple::getName)
