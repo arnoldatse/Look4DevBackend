@@ -22,12 +22,20 @@
   </properties>
 
   <dependencies>
+    <!-- MODULES DEPENDENCIES -->
+    <dependency>
+      <groupId>dev.arnoldatse.opensource.look4dev</groupId>
+      <artifactId>core</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
 </project>

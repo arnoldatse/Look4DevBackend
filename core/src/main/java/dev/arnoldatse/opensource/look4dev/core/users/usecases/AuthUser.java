@@ -8,30 +8,36 @@ import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileS
 import dev.arnoldatse.opensource.look4dev.core.http.FormatResponseDate;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 
+import java.util.Optional;
+
 public class AuthUser {
     private final TokenManager tokenManager;
     private final UserTokenInfosDto userTokenInfosDto;
     private final UserRepository userRepository;
     private String[] profiles;
 
-    public AuthUser(TokenManager tokenManager, UserTokenInfosDto userTokenInfosDto, UserRepository userRepository, String[] profiles){
+    public AuthUser(TokenManager tokenManager, UserTokenInfosDto userTokenInfosDto, UserRepository userRepository, String[] profiles) {
         this.tokenManager = tokenManager;
         this.userTokenInfosDto = userTokenInfosDto;
         this.userRepository = userRepository;
         this.profiles = profiles;
     }
 
-    public AuthResponse authenticate(){
+    public AuthResponse authenticate() {
         String token = tokenManager.generateToken(userTokenInfosDto);
-        String tokenExpirationDate = FormatResponseDate.format(tokenManager.getTokenExpirationDate(token)) ;
+        String tokenExpirationDate = FormatResponseDate.format(tokenManager.getTokenExpirationDate(token));
         String email = tokenManager.getTokenEmail(token);
-        User user = userRepository.findFirstByEmail(email);
-        this.initProfiles(user);
-        return new AuthResponse(token, tokenExpirationDate, email, user.getPseudo(), profiles);
+        Optional<User> optionalUser = userRepository.findFirstByEmail(email);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            this.initProfiles(user);
+            return new AuthResponse(token, tokenExpirationDate, email, user.getPseudo(), profiles);
+        }
+        return null;
     }
 
-    private void initProfiles(User user){
-        if(profiles == null){
+    private void initProfiles(User user) {
+        if (profiles == null) {
             this.profiles = user.getUserProfiles().stream().map(UserProfileSimple::getName).toArray(String[]::new);
         }
     }

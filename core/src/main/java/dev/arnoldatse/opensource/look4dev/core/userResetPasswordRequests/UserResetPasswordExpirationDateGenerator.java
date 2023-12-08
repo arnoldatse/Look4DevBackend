@@ -1,4 +1,4 @@
-package dev.arnoldatse.opensource.look4dev.core.UserResetPasswordRequests;
+package dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests;
 
 import java.util.Calendar;
 import java.util.Date;

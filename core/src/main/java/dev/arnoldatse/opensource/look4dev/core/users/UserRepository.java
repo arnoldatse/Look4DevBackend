@@ -2,16 +2,18 @@ package dev.arnoldatse.opensource.look4dev.core.users;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 
+import java.util.Optional;
+
 public interface UserRepository {
-    public User findFirstById(String id);
+    Optional<User> findFirstById(String id);
 
-    public User findFirstByEmailOrPseudo(String emailOrPseudo);
+    Optional<User> findFirstByEmailOrPseudo(String emailOrPseudo);
 
-    public User findFirstByEmailOrPseudoDistinct(String email, String pseudo);
+    Optional<User> findFirstByEmailOrPseudoDistinct(String email, String pseudo);
 
-    public User findFirstByEmail(String email);
+    Optional<User> findFirstByEmail(String email);
 
-    public User findFirstByPseudo(String pseudo);
+    Optional<User> findFirstByPseudo(String pseudo);
 
-    public User saveUser(User user);
+    User saveUser(User user);
 }

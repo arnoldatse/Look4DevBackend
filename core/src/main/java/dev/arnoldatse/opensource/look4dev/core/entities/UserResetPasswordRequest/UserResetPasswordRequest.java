@@ -5,10 +5,12 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import java.util.Date;
 
 public class UserResetPasswordRequest {
-    private final String id;
-    private final Date expirationDate;
-    private final Date createdAt;
-    private final User user;
+    private String id;
+    private Date expirationDate;
+    private Date createdAt;
+    private User user;
+
+    public UserResetPasswordRequest(){}
 
     public UserResetPasswordRequest(String id, Date expirationDate, Date createdAt, User user) {
         this.id = id;

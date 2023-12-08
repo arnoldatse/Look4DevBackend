@@ -1,6 +1,5 @@
 package dev.arnoldatse.opensource.look4dev.app.entities;
 
-import dev.arnoldatse.opensource.look4dev.app.entities.User.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 

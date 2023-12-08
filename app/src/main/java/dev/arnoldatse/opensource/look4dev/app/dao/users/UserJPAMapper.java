@@ -8,11 +8,11 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.UserMapper;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileSimple;
 import dev.arnoldatse.opensource.look4dev.core.mappers.MapperEntitiesSetable;
 
-public class UserJPAMapper implements UserMapper<User, dev.arnoldatse.opensource.look4dev.app.entities.User.User>, MapperEntitiesSetable<User, dev.arnoldatse.opensource.look4dev.app.entities.User.User> {
-    private dev.arnoldatse.opensource.look4dev.app.entities.User.User userJPA;
+public class UserJPAMapper implements UserMapper<User, dev.arnoldatse.opensource.look4dev.app.entities.User>, MapperEntitiesSetable<User, dev.arnoldatse.opensource.look4dev.app.entities.User> {
+    private dev.arnoldatse.opensource.look4dev.app.entities.User userJPA;
     private User coreUser;
 
-    public UserJPAMapper(User coreUser, dev.arnoldatse.opensource.look4dev.app.entities.User.User userJPA) {
+    public UserJPAMapper(User coreUser, dev.arnoldatse.opensource.look4dev.app.entities.User userJPA) {
         this.userJPA = userJPA;
         this.coreUser = coreUser;
     }
@@ -38,8 +38,8 @@ public class UserJPAMapper implements UserMapper<User, dev.arnoldatse.opensource
     }
 
     @Override
-    public dev.arnoldatse.opensource.look4dev.app.entities.User.User mapToMatchUser() {
-        dev.arnoldatse.opensource.look4dev.app.entities.User.User mappedUserJPA = new dev.arnoldatse.opensource.look4dev.app.entities.User.User();
+    public dev.arnoldatse.opensource.look4dev.app.entities.User mapToMatchUser() {
+        dev.arnoldatse.opensource.look4dev.app.entities.User mappedUserJPA = new dev.arnoldatse.opensource.look4dev.app.entities.User();
         mappedUserJPA.setId(coreUser.getId());
         mappedUserJPA.setLastname(coreUser.getLastname());
         mappedUserJPA.setFirstname(coreUser.getFirstname());
@@ -64,7 +64,7 @@ public class UserJPAMapper implements UserMapper<User, dev.arnoldatse.opensource
     }
 
     @Override
-    public void setMatchEntity(dev.arnoldatse.opensource.look4dev.app.entities.User.User userJPA) {
+    public void setMatchEntity(dev.arnoldatse.opensource.look4dev.app.entities.User userJPA) {
         this.userJPA = userJPA;
     }
 
