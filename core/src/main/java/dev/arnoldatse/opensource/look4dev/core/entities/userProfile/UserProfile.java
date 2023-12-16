@@ -8,7 +8,7 @@ import java.util.List;
 public class UserProfile {
     private int id;
 
-    private String name;
+    private UserProfileName name;
 
     private Date createdAt;
 
@@ -22,11 +22,11 @@ public class UserProfile {
         this.id = id;
     }
 
-    public String getName() {
+    public UserProfileName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(UserProfileName name) {
         this.name = name;
     }
 

@@ -8,19 +8,18 @@ import java.util.Date;
 public class UserProfileSimple {
     private int id;
 
-    private String name;
+    private UserProfileName name;
 
     private Date createdAt;
 
     public UserProfileSimple(){}
-    public UserProfileSimple(int id, String name){
+    public UserProfileSimple(int id, UserProfileName name){
         this.id = id;
         this.name = name;
     }
     public UserProfileSimple(int id){
         this.id = id;
     }
-
 
     public int getId() {
         return id;
@@ -30,11 +29,11 @@ public class UserProfileSimple {
         this.id = id;
     }
 
-    public String getName() {
+    public UserProfileName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(UserProfileName name) {
         this.name = name;
     }
 

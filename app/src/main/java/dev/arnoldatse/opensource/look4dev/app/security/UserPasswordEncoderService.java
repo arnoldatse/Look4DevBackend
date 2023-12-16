@@ -1,4 +1,4 @@
-package dev.arnoldatse.opensource.look4dev.app.auth.services;
+package dev.arnoldatse.opensource.look4dev.app.security;
 
 import dev.arnoldatse.opensource.look4dev.core.auth.UserRegistrationPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;

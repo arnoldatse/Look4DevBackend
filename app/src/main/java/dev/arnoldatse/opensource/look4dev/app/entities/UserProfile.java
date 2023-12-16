@@ -1,5 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.app.entities;
 
+import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileName;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -14,7 +15,8 @@ public class UserProfile {
     private int id;
 
     @Column(unique = true)
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private UserProfileName name;
 
     @Column(name = "created_at")
     @CreationTimestamp
@@ -40,11 +42,11 @@ public class UserProfile {
         this.id = id;
     }
 
-    public String getName() {
+    public UserProfileName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(UserProfileName name) {
         this.name = name;
     }
 

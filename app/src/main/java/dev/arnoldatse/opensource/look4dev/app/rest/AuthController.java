@@ -1,4 +1,4 @@
-package dev.arnoldatse.opensource.look4dev.app.auth.rest;
+package dev.arnoldatse.opensource.look4dev.app.rest;
 
 import dev.arnoldatse.opensource.look4dev.app.auth.services.UserResetPasswordRequestService;
 import dev.arnoldatse.opensource.look4dev.app.exceptions.NotFoundException;

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@ControllerAdvice("com.arnoldatse.look4dev.app")
+@ControllerAdvice("dev.arnoldatse.opensource.look4dev.app")
 public class NotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(BadCredentialsException.class)

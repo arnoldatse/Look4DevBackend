@@ -1,6 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.app.security;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
+import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileName;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileSimple;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             String[] profiles = user.getUserProfiles()
                     .stream()
                     .map(UserProfileSimple::getName)
+                    .map(UserProfileName::getValue)
                     .toArray(String[]::new);
 
             return org.springframework.security.core.userdetails.User.builder()

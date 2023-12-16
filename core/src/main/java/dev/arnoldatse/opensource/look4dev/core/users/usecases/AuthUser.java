@@ -4,6 +4,7 @@ import dev.arnoldatse.opensource.look4dev.core.auth.AuthResponse;
 import dev.arnoldatse.opensource.look4dev.core.auth.TokenManager;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
+import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileName;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileSimple;
 import dev.arnoldatse.opensource.look4dev.core.http.FormatResponseDate;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
@@ -38,7 +39,7 @@ public class AuthUser {
 
     private void initProfiles(User user) {
         if (profiles == null) {
-            this.profiles = user.getUserProfiles().stream().map(UserProfileSimple::getName).toArray(String[]::new);
+            this.profiles = user.getUserProfiles().stream().map(UserProfileSimple::getName).map(UserProfileName::getValue).toArray(String[]::new);
         }
     }
 }
