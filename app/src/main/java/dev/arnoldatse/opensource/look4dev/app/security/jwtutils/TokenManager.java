@@ -2,17 +2,18 @@ package dev.arnoldatse.opensource.look4dev.app.security.jwtutils;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
-@Component
-public class TokenManager extends dev.arnoldatse.opensource.look4dev.core.auth.TokenManager implements Serializable {
+@Service
+public class TokenManager implements dev.arnoldatse.opensource.look4dev.core.auth.TokenManager, Serializable {
     @Serial
     private static final long serialVersionUID = 7008375124389347049L;
 
@@ -36,10 +37,16 @@ public class TokenManager extends dev.arnoldatse.opensource.look4dev.core.auth.T
 
     @Override
     public boolean validateToken(String token, String userEmail) {
-        Claims claims = getClaimsFromToken(token);
-        String email = getEmailFromClaims(claims);
-        boolean isTokenExpired = claims.getExpiration().before(new Date());
-        return (email.equals(userEmail) && !isTokenExpired);
+        try {
+            Claims claims = getClaimsFromToken(token);
+            String email = getEmailFromClaims(claims);
+            boolean isTokenExpired = claims.getExpiration().before(new Date());
+            return (email.equals(userEmail) && !isTokenExpired);
+        }
+        catch (JwtException jwtException){
+            return false;
+        }
+
     }
 
     @Override
@@ -57,7 +64,7 @@ public class TokenManager extends dev.arnoldatse.opensource.look4dev.core.auth.T
         return (String) claims.get("email");
     }
 
-    private Claims getClaimsFromToken(String token) {
+    private Claims getClaimsFromToken(String token) throws JwtException {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
     }
 }

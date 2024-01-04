@@ -42,11 +42,16 @@ public class AuthService {
                 credentialsRequest.getLogin(),
                 credentialsRequest.getPassword()
         );
-        Authentication authenticationResponse = this.authenticationManager.authenticate(authenticationRequest);
-        UserTokenInfosDto userTokenInfosDto = new UserTokenInfosDto((String) authenticationResponse.getPrincipal());
-        String[] profiles = authenticationResponse.getAuthorities().stream()
+        Authentication authentication = this.authenticationManager.authenticate(authenticationRequest);
+        UserTokenInfosDto userTokenInfosDto = new UserTokenInfosDto(authentication.getName());
+        String[] profiles = authentication.getAuthorities().stream()
                 .map(authority -> authority.getAuthority().substring(5))
                 .toArray(String[]::new);
-        return new AuthUser(tokenManager, userTokenInfosDto, userRepository, profiles).authenticate();
+        try {
+            return new AuthUser(tokenManager, userTokenInfosDto, userRepository, profiles).authenticate();
+        }
+        catch (Exception ex){
+            throw new BadCredentialsException("Bad credentials");
+        }
     }
 }

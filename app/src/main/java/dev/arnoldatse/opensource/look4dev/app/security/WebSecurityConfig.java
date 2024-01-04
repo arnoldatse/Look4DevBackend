@@ -19,34 +19,29 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
     @Autowired
     JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+    @Autowired
+    JwtFilter jwtFilter;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 //.csrf((csrf) -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/*").permitAll()
                         .anyRequest().authenticated()
                 ).exceptionHandling(
                         httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer
-                                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 );
         return http.build();
     }
-
-    /*@Bean
-    public AuthenticationManager authenticationManager(
-            CustomUserDetailsService userDetailsService,
-            PasswordEncoder passwordEncoder) {
-        AuthenticationProvider authenticationProvider = new CustomAuthenticationProvider();
-
-        return new ProviderManager(authenticationProvider);
-    }*/
 }

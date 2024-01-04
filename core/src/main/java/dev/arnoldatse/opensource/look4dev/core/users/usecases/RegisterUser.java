@@ -3,9 +3,10 @@ package dev.arnoldatse.opensource.look4dev.core.users.usecases;
 import dev.arnoldatse.opensource.look4dev.core.auth.UserRegistrationPasswordEncoder;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDto;
-import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.UserMapper;
-import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.UserRegisterRequestMapper;
-import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.UserResponseMapper;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.MapperFromUser;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.MapperToUser;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.MapperUserRegisterRequestToUser;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.MapperUserToUserResponse;
 import dev.arnoldatse.opensource.look4dev.core.userProfile.UserProfileRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserRegisterRequestDto;
@@ -24,9 +25,8 @@ public class RegisterUser {
     }
 
     public UserResponseDto register(){
-        UserMapper<User, UserRegisterRequestDto> userRegisterRequestMapper = new UserRegisterRequestMapper(new User(), userRegisterRequestDto, userProfileRepository, userRegistrationPasswordEncoder);
+        MapperToUser userRegisterRequestMapper = new MapperUserRegisterRequestToUser(new User(), userRegisterRequestDto, userProfileRepository, userRegistrationPasswordEncoder);
         User registeredUser = userRepository.saveUser(userRegisterRequestMapper.mapToUser());
-        UserMapper<User, UserResponseDto> userResponseMapper = new UserResponseMapper(registeredUser, new UserResponseDto());
-        return userResponseMapper.mapToMatchUser();
+        return new MapperUserToUserResponse(registeredUser).mapFromUser();
     }
 }

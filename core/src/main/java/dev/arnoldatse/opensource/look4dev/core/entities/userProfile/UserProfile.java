@@ -1,9 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.core.entities.userProfile;
 
-import dev.arnoldatse.opensource.look4dev.core.entities.user.UserWithIntegralUserProfile;
-
 import java.util.Date;
-import java.util.List;
 
 public class UserProfile {
     private int id;
@@ -11,8 +8,6 @@ public class UserProfile {
     private UserProfileName name;
 
     private Date createdAt;
-
-    private List<UserWithIntegralUserProfile> userWithIntegralUserProfiles;
 
     public int getId() {
         return id;
@@ -36,18 +31,5 @@ public class UserProfile {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public List<UserWithIntegralUserProfile> getUsers() {
-        return userWithIntegralUserProfiles;
-    }
-
-    public void addUser(UserWithIntegralUserProfile userWithIntegralUserProfile) {
-        userWithIntegralUserProfile.addUserProfile(this);
-        userWithIntegralUserProfiles.add(userWithIntegralUserProfile);
-    }
-
-    public void setUsers(List<UserWithIntegralUserProfile> userWithIntegralUserProfiles) {
-        this.userWithIntegralUserProfiles = userWithIntegralUserProfiles;
     }
 }

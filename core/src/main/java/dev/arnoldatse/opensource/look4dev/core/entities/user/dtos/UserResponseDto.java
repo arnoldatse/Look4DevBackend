@@ -1,6 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.core.entities.user.dtos;
 
-import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileSimple;
+import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.dtos.UserProfileResponseDto;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +16,7 @@ public class UserResponseDto {
     private String cv;
     private Date createdAt;
     private Date updatedAt;
-    private List<UserProfileSimple> userProfiles;
+    private List<UserProfileResponseDto> userProfiles;
 
     public String getId() {
         return id;
@@ -98,11 +98,11 @@ public class UserResponseDto {
         this.updatedAt = updatedAt;
     }
 
-    public List<UserProfileSimple> getUserProfiles() {
+    public List<UserProfileResponseDto> getUserProfiles() {
         return userProfiles;
     }
 
-    public void setUserProfiles(List<UserProfileSimple> userProfiles) {
+    public void setUserProfiles(List<UserProfileResponseDto> userProfiles) {
         this.userProfiles = userProfiles;
     }
 }

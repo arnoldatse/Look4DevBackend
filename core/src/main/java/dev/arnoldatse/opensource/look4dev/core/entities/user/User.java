@@ -1,6 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.core.entities.user;
 
-import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileSimple;
+import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile;
+import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.UserUrlPlatforms;
 
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,8 @@ public class User {
     private String cv;
     private Date createdAt;
     private Date updatedAt;
-    private List<UserProfileSimple> userProfiles;
+    private List<UserProfile> userProfiles;
+    private UserUrlPlatforms platformsUrls;
 
     public String getId() {
         return id;
@@ -107,16 +109,24 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public List<UserProfileSimple> getUserProfiles() {
+    public List<UserProfile> getUserProfiles() {
         return userProfiles;
     }
 
-    public void addUserProfile(UserProfileSimple userProfile){
+    public void addUserProfile(UserProfile userProfile){
         userProfiles.add(userProfile);
     }
 
-    public void setUserProfiles(List<UserProfileSimple> userProfiles) {
+    public void setUserProfiles(List<UserProfile> userProfiles) {
         this.userProfiles = userProfiles;
+    }
+
+    public UserUrlPlatforms getPlatformsUrls() {
+        return platformsUrls;
+    }
+
+    public void setPlatformsUrls(UserUrlPlatforms platformsUrls) {
+        this.platformsUrls = platformsUrls;
     }
 
     @Override
@@ -133,7 +143,7 @@ public class User {
                 ", cv='" + cv + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", userProfiles=" + userProfiles +
+                ", userProfiles=" + userProfiles.toString() +
                 '}';
     }
 }

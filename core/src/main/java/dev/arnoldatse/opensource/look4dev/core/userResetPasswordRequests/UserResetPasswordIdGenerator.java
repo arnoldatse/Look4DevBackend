@@ -1,6 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests;
 
-import dev.arnoldatse.opensource.look4dev.core.entities.UserResetPasswordRequest.UserResetPasswordRequest;
+import dev.arnoldatse.opensource.look4dev.core.entities.userResetPasswordRequest.UserResetPasswordRequest;
 import dev.arnoldatse.opensource.look4dev.core.utils.RandomString;
 
 import java.util.Optional;

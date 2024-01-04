@@ -16,4 +16,5 @@ public interface UserRepository {
     Optional<User> findFirstByPseudo(String pseudo);
 
     User saveUser(User user);
+    User updateUserDetails(User user);
 }
