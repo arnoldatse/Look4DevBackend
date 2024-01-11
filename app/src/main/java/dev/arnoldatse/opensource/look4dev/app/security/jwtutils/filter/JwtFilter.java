@@ -1,7 +1,8 @@
 package dev.arnoldatse.opensource.look4dev.app.security.jwtutils.filter;
 
+import dev.arnoldatse.opensource.look4dev.app.dao.userUserProfile.UserUserProfileRepository;
+import dev.arnoldatse.opensource.look4dev.app.dao.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.app.security.CustomUserDetailsService;
-import dev.arnoldatse.opensource.look4dev.app.security.FilterAuthenticationGenerator;
 import dev.arnoldatse.opensource.look4dev.core.auth.TokenManager;
 import dev.arnoldatse.opensource.look4dev.core.http.httpError.exceptions.NotFoundHttpErrorException;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -29,13 +30,16 @@ public class JwtFilter extends OncePerRequestFilter {
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    private FilterAuthenticationGenerator filterAuthenticationGenerator;
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserUserProfileRepository userUserProfileRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String tokenHeader = request.getHeader("Authorization");
-        String userId = null;
-        String token = null;
+        String userId;
+        String token;
         if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
             token = tokenHeader.substring(7);
             try {
@@ -52,7 +56,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
         if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             try{
-               Authentication authenticationToken = filterAuthenticationGenerator.generate(userId);
+               Authentication authenticationToken = new JwtUsernamePasswordAuthenticationTokenGenerator(userId, userRepository, userUserProfileRepository).generate();
                 successfulAuthentication(request, response, authenticationToken);
             }
             catch (NotFoundHttpErrorException e){
@@ -73,6 +77,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return request.getServletPath().equals("/auth/register") || request.getServletPath().equals("/auth/login") || request.getServletPath().equals("/auth/reset-password-request");
+        return request.getServletPath().startsWith("/auth");
     }
 }

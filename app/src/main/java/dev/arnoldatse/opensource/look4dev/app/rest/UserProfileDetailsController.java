@@ -18,7 +18,7 @@ public class UserProfileDetailsController {
         return userProfileDetailsService.get();
     }
 
-    @PostMapping("/update")
+    @PatchMapping("/update")
     public UserProfileDetailsResponseDto update(@RequestBody UpdateUserProfileDetailsRequestDto userUpdateProfileDetailsRequest) throws NotFoundHttpErrorException {
         return userProfileDetailsService.update(userUpdateProfileDetailsRequest);
     }
