@@ -8,9 +8,9 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface UserUrlOtherPlatformRepository extends CrudRepository<UserUrlOtherPlatform, String> {
-    public List<UserUrlOtherPlatform> findAllByUserId(String userId);
+    List<UserUrlOtherPlatform> findAllByUserId(String userId);
 
     @Modifying
     @Query("delete from UserUrlOtherPlatform u where u.user.id = ?1")
-    public void deleteByUserId(String userId);
+    void deleteByUserId(String userId);
 }

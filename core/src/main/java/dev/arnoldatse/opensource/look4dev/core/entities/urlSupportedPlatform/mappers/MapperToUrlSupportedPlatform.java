@@ -3,5 +3,5 @@ package dev.arnoldatse.opensource.look4dev.core.entities.urlSupportedPlatform.ma
 import dev.arnoldatse.opensource.look4dev.core.entities.urlSupportedPlatform.UrlSupportedPlatform;
 
 public interface MapperToUrlSupportedPlatform {
-    public UrlSupportedPlatform mapToUrlSupportedPlatform();
+    UrlSupportedPlatform mapToUrlSupportedPlatform();
 }

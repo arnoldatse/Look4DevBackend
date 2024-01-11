@@ -4,7 +4,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.dtos.UserProfileResponseDto;
 
 public class MapperUserProfileToUserProfileResponse implements MapperFromUserProfile<UserProfileResponseDto>{
-    private UserProfile userProfile;
+    private final UserProfile userProfile;
 
     public MapperUserProfileToUserProfileResponse(UserProfile userProfile) {
         this.userProfile = userProfile;

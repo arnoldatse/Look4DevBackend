@@ -4,7 +4,7 @@ public enum UserProfileName {
     DEVELOPER("DEVELOPER"),
     RECRUITER("RECRUITER");
     private final String value;
-    private UserProfileName(String userProfileValue){
+    UserProfileName(String userProfileValue){
         value = userProfileValue;
     }
 

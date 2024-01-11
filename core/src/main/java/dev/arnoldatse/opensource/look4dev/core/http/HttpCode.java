@@ -13,7 +13,7 @@ public enum HttpCode {
 
 
     private final int value;
-    private HttpCode(int value){
+    HttpCode(int value){
         this.value = value;
     }
 

@@ -9,13 +9,11 @@ import dev.arnoldatse.opensource.look4dev.core.userProfile.UserProfileRepository
 import java.util.List;
 
 public class MapperUserRegisterRequestToUser implements MapperToUser {
-    UserRegisterRequestDto userRegisterRequestDto;
-    User user;
+    private final UserRegisterRequestDto userRegisterRequestDto;
     private final UserRegistrationPasswordEncoder userRegistrationPasswordEncoder;
     private final UserProfileRepository userProfileRepository;
 
-    public MapperUserRegisterRequestToUser(User user, UserRegisterRequestDto userRegisterRequestDto, UserProfileRepository userProfileRepository, UserRegistrationPasswordEncoder userRegistrationPasswordEncoder){
-        this.user = user;
+    public MapperUserRegisterRequestToUser(UserRegisterRequestDto userRegisterRequestDto, UserProfileRepository userProfileRepository, UserRegistrationPasswordEncoder userRegistrationPasswordEncoder){
         this.userRegisterRequestDto = userRegisterRequestDto;
         this.userProfileRepository = userProfileRepository;
         this.userRegistrationPasswordEncoder = userRegistrationPasswordEncoder;

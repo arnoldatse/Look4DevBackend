@@ -5,6 +5,6 @@ import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlO
 import java.util.List;
 
 public interface UserUrlOtherPlatformRepository {
-    public List<UserUrlOtherPlatform> findAllByUserId(String userId);
-    public void deleteAllByUserId(String userId);
+    List<UserUrlOtherPlatform> findAllByUserId(String userId);
+    void deleteAllByUserId(String userId);
 }

@@ -3,5 +3,5 @@ package dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrl
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatform;
 
 public interface MapperToUserUrlOtherPlatform {
-    public UserUrlOtherPlatform mapToUserUrlOtherPlatform();
+    UserUrlOtherPlatform mapToUserUrlOtherPlatform();
 }

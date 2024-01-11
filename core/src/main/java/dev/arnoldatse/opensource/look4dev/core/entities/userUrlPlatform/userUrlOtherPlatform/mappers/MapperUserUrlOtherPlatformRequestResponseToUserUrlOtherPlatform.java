@@ -4,7 +4,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlO
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlOtherPlatform.dtos.UserUrlOtherPlatformRequestResponseDto;
 
 public class MapperUserUrlOtherPlatformRequestResponseToUserUrlOtherPlatform implements MapperToUserUrlOtherPlatform{
-    private UserUrlOtherPlatformRequestResponseDto userUrlOtherPlatformRequestResponseDto;
+    private final UserUrlOtherPlatformRequestResponseDto userUrlOtherPlatformRequestResponseDto;
 
     public MapperUserUrlOtherPlatformRequestResponseToUserUrlOtherPlatform(UserUrlOtherPlatformRequestResponseDto userUrlOtherPlatformRequestResponseDto) {
         this.userUrlOtherPlatformRequestResponseDto = userUrlOtherPlatformRequestResponseDto;

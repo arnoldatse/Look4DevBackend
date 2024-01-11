@@ -3,5 +3,5 @@ package dev.arnoldatse.opensource.look4dev.core.entities.userResetPasswordReques
 import dev.arnoldatse.opensource.look4dev.core.entities.userResetPasswordRequest.UserResetPasswordRequest;
 
 public interface MapperToUserResetPasswordRequest {
-    public UserResetPasswordRequest mapToUserResetPasswordRequest();
+    UserResetPasswordRequest mapToUserResetPasswordRequest();
 }

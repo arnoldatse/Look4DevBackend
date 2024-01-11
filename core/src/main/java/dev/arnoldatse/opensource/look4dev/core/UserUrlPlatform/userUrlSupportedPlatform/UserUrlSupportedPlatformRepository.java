@@ -5,6 +5,6 @@ import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlS
 import java.util.List;
 
 public interface UserUrlSupportedPlatformRepository {
-    public List<UserUrlSupportedPlatform> findAllByUserId(String userId);
-    public void deleteAllByUserId(String userId);
+    List<UserUrlSupportedPlatform> findAllByUserId(String userId);
+    void deleteAllByUserId(String userId);
 }
