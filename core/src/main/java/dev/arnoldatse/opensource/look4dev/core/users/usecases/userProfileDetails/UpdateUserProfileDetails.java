@@ -22,14 +22,14 @@ public class UpdateUserProfileDetails {
     }
 
     public UserProfileDetailsResponseDto execute() throws NotFoundHttpErrorException {
-        Optional<User> optionalUser = userRepository.findFirstByEmailOrPseudo(userId);
-        if (optionalUser.isPresent()) {
+        Optional<User> optionalUser = userRepository.findFirstById(userId);
+        if(optionalUser.isPresent()){
             User user = optionalUser.get();
             updateUserWithUserProfileDetailsRequestResponseDto(user, updateUserProfileDetailsRequestDto);
-            user = userRepository.saveUser(user);
-            return new MapperUserToUserProfileDetailsResponse(user).mapFromUser();
+            User userCreated = userRepository.saveUser(user);
+            return new MapperUserToUserProfileDetailsResponse(userCreated).mapFromUser();
         }
-        throw new NotFoundHttpErrorException("user not found");
+        throw new NotFoundHttpErrorException("User not found");
     }
 
     private void updateUserWithUserProfileDetailsRequestResponseDto(User user, UpdateUserProfileDetailsRequestDto updateUserProfileDetailsRequestDto) {

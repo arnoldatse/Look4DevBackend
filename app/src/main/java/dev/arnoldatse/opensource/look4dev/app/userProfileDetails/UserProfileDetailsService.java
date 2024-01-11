@@ -1,5 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.app.userProfileDetails;
 
+import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UpdateUserProfileDetailsRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.http.httpError.exceptions.NotFoundHttpErrorException;
@@ -9,6 +11,8 @@ import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserProfileDetailsService {
@@ -24,6 +28,7 @@ public class UserProfileDetailsService {
     }
 
     private String getAuthenticatedUserId(){
-        return SecurityContextHolder.getContext().getAuthentication().getName();
+        UserTokenInfosDto userTokenInfos = (UserTokenInfosDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userTokenInfos.id();
     }
 }

@@ -18,10 +18,10 @@ public class GetUserProfileDetails {
     }
 
     public UserProfileDetailsResponseDto execute() throws NotFoundHttpErrorException {
-        Optional<User> userOptional = userRepository.findFirstByEmailOrPseudo(userId);
+        Optional<User> userOptional = userRepository.findFirstById(userId);
         if(userOptional.isPresent()){
             return new MapperUserToUserProfileDetailsResponse(userOptional.get()).mapFromUser();
         }
-        throw  new NotFoundHttpErrorException("User not found");
+        throw new NotFoundHttpErrorException("User not found");
     }
 }

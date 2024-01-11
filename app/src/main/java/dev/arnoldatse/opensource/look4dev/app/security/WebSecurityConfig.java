@@ -1,7 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.app.security;
 
 import dev.arnoldatse.opensource.look4dev.app.security.jwtutils.JwtAuthenticationEntryPoint;
-import dev.arnoldatse.opensource.look4dev.app.security.jwtutils.JwtFilter;
+import dev.arnoldatse.opensource.look4dev.app.security.jwtutils.filter.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

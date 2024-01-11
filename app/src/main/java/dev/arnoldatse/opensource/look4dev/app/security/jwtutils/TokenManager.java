@@ -30,18 +30,18 @@ public class TokenManager implements dev.arnoldatse.opensource.look4dev.core.aut
                 .setIssuer(appName)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000))
-                .claim("email", user.email())
+                .claim(userIdClaim, user.id())
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
 
     @Override
-    public boolean validateToken(String token, String userEmail) {
+    public boolean validateToken(String token, String userId) {
         try {
             Claims claims = getClaimsFromToken(token);
-            String email = getEmailFromClaims(claims);
+            String tokenUserId = getUserIdFromClaims(claims);
             boolean isTokenExpired = claims.getExpiration().before(new Date());
-            return (email.equals(userEmail) && !isTokenExpired);
+            return (tokenUserId.equals(userId) && !isTokenExpired);
         }
         catch (JwtException jwtException){
             return false;
@@ -50,9 +50,9 @@ public class TokenManager implements dev.arnoldatse.opensource.look4dev.core.aut
     }
 
     @Override
-    public String getTokenEmail(String token) {
+    public String getTokenUserId(String token) {
         Claims claims = getClaimsFromToken(token);
-        return getEmailFromClaims(claims);
+        return getUserIdFromClaims(claims);
     }
 
     @Override
@@ -60,8 +60,8 @@ public class TokenManager implements dev.arnoldatse.opensource.look4dev.core.aut
         return getClaimsFromToken(token).getExpiration();
     }
 
-    private String getEmailFromClaims(Claims claims){
-        return (String) claims.get("email");
+    private String getUserIdFromClaims(Claims claims){
+        return (String) claims.get(userIdClaim);
     }
 
     private Claims getClaimsFromToken(String token) throws JwtException {

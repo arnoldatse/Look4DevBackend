@@ -17,6 +17,11 @@ public class CoreUserRepositoryImpl implements dev.arnoldatse.opensource.look4de
 
     @Override
     public Optional<dev.arnoldatse.opensource.look4dev.core.entities.user.User> findFirstById(String id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            return Optional.of(mapUserToCoreUser(user));
+        }
         return Optional.empty();
     }
 
@@ -25,7 +30,6 @@ public class CoreUserRepositoryImpl implements dev.arnoldatse.opensource.look4de
     public Optional<dev.arnoldatse.opensource.look4dev.core.entities.user.User> findFirstByEmailOrPseudo(String emailOrPseudo) {
         User user =  userRepository.findFirstByEmailOrPseudo(emailOrPseudo, emailOrPseudo);
         if(user!=null){
-            user.getUserUserProfiles();
             return Optional.of(mapUserToCoreUser(user)) ;
         }
         return Optional.empty();
@@ -66,7 +70,7 @@ public class CoreUserRepositoryImpl implements dev.arnoldatse.opensource.look4de
         return new MapperUserToCoreUser(userCreated).mapToUser();
     }
 
-    private dev.arnoldatse.opensource.look4dev.core.entities.user.User mapUserToCoreUser(dev.arnoldatse.opensource.look4dev.app.entities.user.User user){
+    private dev.arnoldatse.opensource.look4dev.core.entities.user.User mapUserToCoreUser(User user){
         return new MapperUserToCoreUser(user).mapToUser();
     }
 
