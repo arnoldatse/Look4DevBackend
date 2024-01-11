@@ -1,5 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails;
 
+import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatformRepository;
+import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UpdateUserProfileDetailsRequestDto;
@@ -14,11 +16,15 @@ public class UpdateUserProfileDetails {
     private final UpdateUserProfileDetailsRequestDto updateUserProfileDetailsRequestDto;
     private final String userId;
     private final UserRepository userRepository;
+    private final UserUrlOtherPlatformRepository userUrlOtherPlatformRepository;
+    private final UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
 
-    public UpdateUserProfileDetails(UpdateUserProfileDetailsRequestDto updateUserProfileDetailsRequestDto, String userId, UserRepository userRepository) {
+    public UpdateUserProfileDetails(UpdateUserProfileDetailsRequestDto updateUserProfileDetailsRequestDto, String userId, UserRepository userRepository, UserUrlOtherPlatformRepository userUrlOtherPlatformRepository, UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository) {
         this.updateUserProfileDetailsRequestDto = updateUserProfileDetailsRequestDto;
         this.userId = userId;
         this.userRepository = userRepository;
+        this.userUrlOtherPlatformRepository = userUrlOtherPlatformRepository;
+        this.userUrlSupportedPlatformRepository = userUrlSupportedPlatformRepository;
     }
 
     public UserProfileDetailsResponseDto execute() throws NotFoundHttpErrorException {
@@ -26,10 +32,16 @@ public class UpdateUserProfileDetails {
         if(optionalUser.isPresent()){
             User user = optionalUser.get();
             updateUserWithUserProfileDetailsRequestResponseDto(user, updateUserProfileDetailsRequestDto);
+            deleteAllUserUrlPlatforms(user.getId());
             User userCreated = userRepository.saveUser(user);
             return new MapperUserToUserProfileDetailsResponse(userCreated).mapFromUser();
         }
         throw new NotFoundHttpErrorException("User not found");
+    }
+
+    private void deleteAllUserUrlPlatforms(String userId){
+        userUrlOtherPlatformRepository.deleteAllByUserId(userId);
+        userUrlSupportedPlatformRepository.deleteAllByUserId(userId);
     }
 
     private void updateUserWithUserProfileDetailsRequestResponseDto(User user, UpdateUserProfileDetailsRequestDto updateUserProfileDetailsRequestDto) {

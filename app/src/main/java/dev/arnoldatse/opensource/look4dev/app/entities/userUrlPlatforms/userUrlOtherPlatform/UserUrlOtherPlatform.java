@@ -19,7 +19,7 @@ public class UserUrlOtherPlatform {
     @Column(nullable = false)
     private String label;
 
-    @Column(name ="created_at" ,nullable = false)
+    @Column(name ="created_at", nullable = false)
     @CreationTimestamp
     private Date createdAt;
 

@@ -10,14 +10,12 @@ import dev.arnoldatse.opensource.look4dev.core.http.httpError.exceptions.NotFoun
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
-public class JwtUsernamePasswordAuthenticationTokenGenerator{
+public class JwtUsernamePasswordAuthenticationTokenGenerator {
     private final String userId;
     private final UserRepository userRepository;
     private final UserUserProfileRepository userUserProfileRepository;
@@ -30,14 +28,13 @@ public class JwtUsernamePasswordAuthenticationTokenGenerator{
 
     public Authentication generate() throws NotFoundHttpErrorException {
         Optional<User> optionalUser = userRepository.findById(userId);
-        if(optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             UserTokenInfosDto userTokenInfos = new UserTokenInfosDto(optionalUser.get().getId());
             Set<SimpleGrantedAuthority> simpleGrantedAuthorities = userUserProfileRepository.findByUserId(userId)
                     .stream()
                     .map(UserUserProfile::getUserProfile)
-                    .map(
-                            userProfile ->
-                                    new MapperUserProfileToSimpleGrantedAuthority(userProfile).mapFromUserProfile())
+                    .map(userProfile -> new MapperUserProfileToSimpleGrantedAuthority(userProfile)
+                            .mapFromUserProfile())
                     .collect(Collectors.toSet());
 
             return new UsernamePasswordAuthenticationToken(

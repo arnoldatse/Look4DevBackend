@@ -25,7 +25,6 @@ public class UserUrlSupportedPlatform {
     @JoinColumn(name = "url_supported_platform_id")
     private UrlSupportedPlatform supportedPlatform;
 
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

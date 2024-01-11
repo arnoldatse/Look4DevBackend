@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface UserUrlOtherPlatformRepository {
     public List<UserUrlOtherPlatform> findAllByUserId(String userId);
+    public void deleteAllByUserId(String userId);
 }
