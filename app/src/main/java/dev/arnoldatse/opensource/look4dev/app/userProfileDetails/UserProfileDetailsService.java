@@ -7,6 +7,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDet
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UpdateUserProfileDetailsRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.http.httpError.exceptions.NotFoundHttpErrorException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
+import dev.arnoldatse.opensource.look4dev.core.users.UserUserProfileRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.GetUserProfileDetails;
 import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.UpdateUserProfileDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class UserProfileDetailsService {
     UserUrlOtherPlatformRepository userUrlOtherPlatformRepository;
     @Autowired
     UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
+    @Autowired
+    UserUserProfileRepository userUserProfileRepository;
 
     public UserProfileDetailsResponseDto get() throws NotFoundHttpErrorException {
         return new GetUserProfileDetails(userRepository, getAuthenticatedUserId()).execute();
@@ -32,7 +35,8 @@ public class UserProfileDetailsService {
                 getAuthenticatedUserId(),
                 userRepository,
                 userUrlOtherPlatformRepository,
-                userUrlSupportedPlatformRepository
+                userUrlSupportedPlatformRepository,
+                userUserProfileRepository
         ).execute();
     }
 

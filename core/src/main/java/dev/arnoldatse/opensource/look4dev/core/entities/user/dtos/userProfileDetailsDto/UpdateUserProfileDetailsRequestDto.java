@@ -8,6 +8,7 @@ public class UpdateUserProfileDetailsRequestDto {
     private String email;
     private String pseudo;
     private String bio;
+    private int[] userProfilesIds;
     private UserUrlPlatformsRequestResponseDto platformsUrls;
 
     public String getLastname() {
@@ -50,11 +51,19 @@ public class UpdateUserProfileDetailsRequestDto {
         this.bio = bio;
     }
 
+    public int[] getUserProfilesIds() {
+        return userProfilesIds;
+    }
+
+    public void setUserProfilesIds(int[] userProfilesIds) {
+        this.userProfilesIds = userProfilesIds;
+    }
+
     public UserUrlPlatformsRequestResponseDto getPlatformsUrls() {
         return platformsUrls;
     }
 
-    public void setUserUrlPlatforms(UserUrlPlatformsRequestResponseDto userUrlPlatforms) {
+    public void setPlatformsUrls(UserUrlPlatformsRequestResponseDto userUrlPlatforms) {
         this.platformsUrls = userUrlPlatforms;
     }
 }

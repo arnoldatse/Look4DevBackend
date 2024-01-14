@@ -10,7 +10,8 @@ public class UserProfileDetailsResponseDto {
     private String bio;
     private String picturePath;
     private String cvPath;
-    private UserUrlPlatformsRequestResponseDto userUrlPlatforms;
+    private int[] userProfilesIds;
+    private UserUrlPlatformsRequestResponseDto platformsUrls;
 
     public String getLastname() {
         return lastname;
@@ -68,11 +69,19 @@ public class UserProfileDetailsResponseDto {
         this.cvPath = cvPath;
     }
 
-    public UserUrlPlatformsRequestResponseDto getUserUrlPlatforms() {
-        return userUrlPlatforms;
+    public int[] getUserProfilesIds() {
+        return userProfilesIds;
     }
 
-    public void setUserUrlPlatforms(UserUrlPlatformsRequestResponseDto userUrlPlatforms) {
-        this.userUrlPlatforms = userUrlPlatforms;
+    public void setUserProfilesIds(int[] userProfilesIds) {
+        this.userProfilesIds = userProfilesIds;
+    }
+
+    public UserUrlPlatformsRequestResponseDto getPlatformsUrls() {
+        return platformsUrls;
+    }
+
+    public void setPlatformsUrls(UserUrlPlatformsRequestResponseDto userUrlPlatforms) {
+        this.platformsUrls = userUrlPlatforms;
     }
 }
