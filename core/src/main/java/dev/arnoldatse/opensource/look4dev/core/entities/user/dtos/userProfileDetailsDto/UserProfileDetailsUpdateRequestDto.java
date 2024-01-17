@@ -2,7 +2,7 @@ package dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDe
 
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.dtos.UserUrlPlatformsRequestResponseDto;
 
-public class UpdateUserProfileDetailsRequestDto {
+public class UserProfileDetailsUpdateRequestDto {
     private String lastname;
     private String firstname;
     private String email;

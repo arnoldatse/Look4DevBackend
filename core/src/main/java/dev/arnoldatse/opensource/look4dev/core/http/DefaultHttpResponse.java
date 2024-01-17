@@ -1,11 +1,9 @@
-package dev.arnoldatse.opensource.look4dev.core.http.httpError;
+package dev.arnoldatse.opensource.look4dev.core.http;
 
-import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
-
-public class DefaultHttpErrorResponse {
+public class DefaultHttpResponse {
     private final int code;
     private final String message;
-    public DefaultHttpErrorResponse(HttpCode httpCode, String message){
+    public DefaultHttpResponse(HttpCode httpCode, String message){
         code = httpCode.getValue();
         this.message = message;
     }

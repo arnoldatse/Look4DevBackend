@@ -3,7 +3,7 @@ package dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetail
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.userProfileDetails.MapperUserToUserProfileDetailsResponse;
-import dev.arnoldatse.opensource.look4dev.core.http.httpError.exceptions.NotFoundHttpErrorException;
+import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 
 import java.util.Optional;
@@ -17,11 +17,11 @@ public class GetUserProfileDetails {
         this.userId = userId;
     }
 
-    public UserProfileDetailsResponseDto execute() throws NotFoundHttpErrorException {
+    public UserProfileDetailsResponseDto execute() throws NotFoundException {
         Optional<User> userOptional = userRepository.findFirstById(userId);
         if(userOptional.isPresent()){
             return new MapperUserToUserProfileDetailsResponse(userOptional.get()).mapFromUser();
         }
-        throw new NotFoundHttpErrorException("User not found");
+        throw new NotFoundException("User not found");
     }
 }

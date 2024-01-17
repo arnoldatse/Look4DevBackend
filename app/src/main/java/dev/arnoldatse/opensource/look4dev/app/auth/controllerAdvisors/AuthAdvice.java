@@ -1,7 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.app.auth.controllerAdvisors;
 
+import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
-import dev.arnoldatse.opensource.look4dev.core.http.httpError.DefaultHttpErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AuthAdvice {
     @ResponseBody
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<DefaultHttpErrorResponse> BadCredentialHandleException(HttpServletRequest request, Throwable ex) {
-        return new ResponseEntity<>(new DefaultHttpErrorResponse(HttpCode.UNAUTHORIZED, ex.getMessage()), HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<DefaultHttpResponse> BadCredentialHandleException(HttpServletRequest request, Throwable ex) {
+        return new ResponseEntity<>(new DefaultHttpResponse(HttpCode.UNAUTHORIZED, ex.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 
     @ResponseBody
     @ExceptionHandler(UsernameNotFoundException.class)
-    public ResponseEntity<DefaultHttpErrorResponse> UsernameNotFoundHandleException(HttpServletRequest request, Throwable ex) {
-        return new ResponseEntity<>(new DefaultHttpErrorResponse(HttpCode.UNAUTHORIZED, ex.getMessage()), HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<DefaultHttpResponse> UsernameNotFoundHandleException(HttpServletRequest request, Throwable ex) {
+        return new ResponseEntity<>(new DefaultHttpResponse(HttpCode.UNAUTHORIZED, ex.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 }

@@ -2,14 +2,14 @@ package dev.arnoldatse.opensource.look4dev.core.users.usecases;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserIdToFindRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
-import dev.arnoldatse.opensource.look4dev.core.http.httpError.exceptions.NotFoundHttpErrorException;
+import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests.SendUserResetPasswordUrlNotification;
 import dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests.UserResetPasswordExpirationDateGenerator;
 import dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests.UserResetPasswordIdGenerator;
 import dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests.UserResetPasswordRequestRepository;
 import dev.arnoldatse.opensource.look4dev.core.entities.userResetPasswordRequest.UserResetPasswordRequest;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
-import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpSuccessResponse;
+import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 
 import java.util.Date;
@@ -28,7 +28,7 @@ public class ResetUserPassword {
         this.sendUserResetPasswordUrlNotification = sendUserResetPasswordUrlNotification;
     }
 
-    public DefaultHttpSuccessResponse execute() throws NotFoundHttpErrorException {
+    public DefaultHttpResponse execute() throws NotFoundException {
         Optional<User> optionalUser = userRepository.findFirstByEmailOrPseudo(userIdToFindRequestDto.idToFind());
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
@@ -37,9 +37,9 @@ public class ResetUserPassword {
             deleteAllUserResetPasswordRequests(user);
             userResetPasswordRequestRepository.save(new UserResetPasswordRequest(userResetPasswordId, expirationDate, new Date(), user));
             sendUserResetPasswordUrlNotification.sendUrl();
-            return new DefaultHttpSuccessResponse(HttpCode.OK, "Reset password request sent");
+            return new DefaultHttpResponse(HttpCode.OK, "Reset password request sent");
         }
-        throw new NotFoundHttpErrorException("User not found");
+        throw new NotFoundException("User not found");
     }
 
     private void deleteAllUserResetPasswordRequests(User user) {

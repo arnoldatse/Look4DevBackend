@@ -4,7 +4,7 @@ import dev.arnoldatse.opensource.look4dev.app.dao.userUserProfile.UserUserProfil
 import dev.arnoldatse.opensource.look4dev.app.dao.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.app.security.CustomUserDetailsService;
 import dev.arnoldatse.opensource.look4dev.core.auth.TokenManager;
-import dev.arnoldatse.opensource.look4dev.core.http.httpError.exceptions.NotFoundHttpErrorException;
+import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import jakarta.servlet.FilterChain;
@@ -59,7 +59,7 @@ public class JwtFilter extends OncePerRequestFilter {
                Authentication authenticationToken = new JwtUsernamePasswordAuthenticationTokenGenerator(userId, userRepository, userUserProfileRepository).generate();
                 successfulAuthentication(request, response, authenticationToken);
             }
-            catch (NotFoundHttpErrorException e){
+            catch (NotFoundException e){
                 throw new ServletException("user in token not found");
             }
         }

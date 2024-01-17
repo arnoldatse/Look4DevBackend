@@ -1,6 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.core.users.usecases;
 
-import dev.arnoldatse.opensource.look4dev.core.auth.UserRegistrationPasswordEncoder;
+import dev.arnoldatse.opensource.look4dev.core.users.UserPasswordEncoder;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.MapperToUser;
@@ -13,18 +13,18 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserRegisterRe
 public class RegisterUser {
     private final UserRegisterRequestDto userRegisterRequestDto;
     private final UserRepository userRepository;
-    private final UserRegistrationPasswordEncoder userRegistrationPasswordEncoder;
+    private final UserPasswordEncoder userPasswordEncoder;
     private final UserProfileRepository userProfileRepository;
 
-    public RegisterUser(UserRegisterRequestDto userRegisterRequestDto, UserRepository userRepository, UserRegistrationPasswordEncoder userRegistrationPasswordEncoder, UserProfileRepository userProfileRepository){
+    public RegisterUser(UserRegisterRequestDto userRegisterRequestDto, UserRepository userRepository, UserPasswordEncoder userPasswordEncoder, UserProfileRepository userProfileRepository){
         this.userRegisterRequestDto = userRegisterRequestDto;
         this.userRepository = userRepository;
-        this.userRegistrationPasswordEncoder = userRegistrationPasswordEncoder;
+        this.userPasswordEncoder = userPasswordEncoder;
         this.userProfileRepository = userProfileRepository;
     }
 
     public UserResponseDto register(){
-        MapperToUser userRegisterRequestMapper = new MapperUserRegisterRequestToUser(userRegisterRequestDto, userProfileRepository, userRegistrationPasswordEncoder);
+        MapperToUser userRegisterRequestMapper = new MapperUserRegisterRequestToUser(userRegisterRequestDto, userProfileRepository, userPasswordEncoder);
         User registeredUser = userRepository.saveUser(userRegisterRequestMapper.mapToUser());
         return new MapperUserToUserResponse(registeredUser).mapFromUser();
     }

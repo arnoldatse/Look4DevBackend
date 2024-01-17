@@ -7,8 +7,8 @@ import dev.arnoldatse.opensource.look4dev.app.auth.services.AuthService;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserIdToFindRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserRegisterRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDto;
-import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpSuccessResponse;
-import dev.arnoldatse.opensource.look4dev.core.http.httpError.exceptions.NotFoundHttpErrorException;
+import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
+import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +34,7 @@ public class AuthController {
     }
 
     @PostMapping("/reset-password-request")
-    public DefaultHttpSuccessResponse resetPasswordRequest(@RequestBody UserIdToFindRequestDto userIdToFindRequestDto) throws NotFoundHttpErrorException {
+    public DefaultHttpResponse resetPasswordRequest(@RequestBody UserIdToFindRequestDto userIdToFindRequestDto) throws NotFoundException {
         return userResetPasswordRequestService.create(userIdToFindRequestDto);
     }
 }

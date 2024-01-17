@@ -3,7 +3,7 @@ package dev.arnoldatse.opensource.look4dev.app.auth.services;
 import dev.arnoldatse.opensource.look4dev.core.auth.AuthResponse;
 import dev.arnoldatse.opensource.look4dev.core.auth.CredentialsRequest;
 import dev.arnoldatse.opensource.look4dev.core.auth.TokenManager;
-import dev.arnoldatse.opensource.look4dev.core.auth.UserRegistrationPasswordEncoder;
+import dev.arnoldatse.opensource.look4dev.core.users.UserPasswordEncoder;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserRegisterRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
@@ -28,12 +28,12 @@ public class AuthService {
     UserRepository userRepository;
 
     @Autowired
-    UserRegistrationPasswordEncoder userRegistrationPasswordEncoder;
+    UserPasswordEncoder userPasswordEncoder;
     @Autowired
     UserProfileRepository userProfileRepository;
 
     public UserResponseDto register(UserRegisterRequestDto userRegisterRequestDto) {
-        RegisterUser registerUser = new RegisterUser(userRegisterRequestDto, userRepository, userRegistrationPasswordEncoder, userProfileRepository);
+        RegisterUser registerUser = new RegisterUser(userRegisterRequestDto, userRepository, userPasswordEncoder, userProfileRepository);
         return registerUser.register();
     }
 

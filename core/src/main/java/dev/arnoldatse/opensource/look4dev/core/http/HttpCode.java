@@ -9,7 +9,8 @@ public enum HttpCode {
     FORBIDDEN(403),
     NOT_FOUND(404),
     NOT_ACCEPTABLE(406),
-    INTERNAL_SERVER_ERROR(500);
+    INTERNAL_SERVER_ERROR(500),
+    UNKNOWN_ERROR(520);
 
 
     private final int value;

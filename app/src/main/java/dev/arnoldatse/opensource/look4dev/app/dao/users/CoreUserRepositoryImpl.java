@@ -70,6 +70,12 @@ public class CoreUserRepositoryImpl implements dev.arnoldatse.opensource.look4de
         return new MapperUserToCoreUser(userCreated).mapToUser();
     }
 
+    @Override
+    @Transactional
+    public void updateUserPassword(String userId, String password) {
+        userRepository.updatePassword(userId, password);
+    }
+
     private dev.arnoldatse.opensource.look4dev.core.entities.user.User mapUserToCoreUser(User user){
         return new MapperUserToCoreUser(user).mapToUser();
     }

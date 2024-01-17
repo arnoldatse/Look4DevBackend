@@ -6,7 +6,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.mappers.MapperUserProfileToString;
 import dev.arnoldatse.opensource.look4dev.core.http.FormatResponseDate;
-import dev.arnoldatse.opensource.look4dev.core.http.httpError.exceptions.NotFoundHttpErrorException;
+import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 
 import java.util.Optional;
@@ -24,7 +24,7 @@ public class AuthUser {
         this.profiles = profiles;
     }
 
-    public AuthResponse authenticate() throws NotFoundHttpErrorException {
+    public AuthResponse authenticate() throws NotFoundException {
         String token = tokenManager.generateToken(userTokenInfosDto);
         String tokenExpirationDate = FormatResponseDate.format(tokenManager.getTokenExpirationDate(token));
         Optional<User> optionalUser = userRepository.findFirstById(userTokenInfosDto.id());
@@ -33,7 +33,7 @@ public class AuthUser {
             this.initProfiles(user);
             return new AuthResponse(token, tokenExpirationDate, user.getId(), user.getPseudo(), profiles);
         }
-        throw new NotFoundHttpErrorException("User not found");
+        throw new NotFoundException("User not found");
     }
 
     private void initProfiles(User user) {

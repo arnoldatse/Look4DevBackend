@@ -3,12 +3,16 @@ package dev.arnoldatse.opensource.look4dev.app.userProfileDetails;
 import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatformRepository;
 import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.PasswordUpdateRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsResponseDto;
-import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UpdateUserProfileDetailsRequestDto;
-import dev.arnoldatse.opensource.look4dev.core.http.httpError.exceptions.NotFoundHttpErrorException;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsUpdateRequestDto;
+import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
+import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
+import dev.arnoldatse.opensource.look4dev.core.users.UserPasswordEncoder;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.UserUserProfileRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.GetUserProfileDetails;
+import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.UpdateUserPassword;
 import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.UpdateUserProfileDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,19 +28,30 @@ public class UserProfileDetailsService {
     UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
     @Autowired
     UserUserProfileRepository userUserProfileRepository;
+    @Autowired
+    UserPasswordEncoder userPasswordEncoder;
 
-    public UserProfileDetailsResponseDto get() throws NotFoundHttpErrorException {
+    public UserProfileDetailsResponseDto get() throws NotFoundException {
         return new GetUserProfileDetails(userRepository, getAuthenticatedUserId()).execute();
     }
 
-    public UserProfileDetailsResponseDto update(UpdateUserProfileDetailsRequestDto updateUserProfileDetailsRequestDto) throws NotFoundHttpErrorException {
+    public UserProfileDetailsResponseDto update(UserProfileDetailsUpdateRequestDto userProfileDetailsUpdateRequestDto) throws NotFoundException {
         return new UpdateUserProfileDetails(
-                updateUserProfileDetailsRequestDto,
+                userProfileDetailsUpdateRequestDto,
                 getAuthenticatedUserId(),
                 userRepository,
                 userUrlOtherPlatformRepository,
                 userUrlSupportedPlatformRepository,
                 userUserProfileRepository
+        ).execute();
+    }
+
+    public DefaultHttpResponse updatePassword(PasswordUpdateRequestDto passwordUpdateRequestDto) throws Exception {
+        return new UpdateUserPassword(
+                getAuthenticatedUserId(),
+                passwordUpdateRequestDto,
+                userRepository,
+                userPasswordEncoder
         ).execute();
     }
 

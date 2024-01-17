@@ -1,7 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.userProfileDetails;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
-import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UpdateUserProfileDetailsRequestDto;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsUpdateRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.MapperToUser;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.mappers.MapperIntToUserProfile;
@@ -12,10 +12,10 @@ import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.mappers.
 import java.util.Arrays;
 import java.util.List;
 
-public class MapperUpdateUserProfileDetailsRequestToUser implements MapperToUser {
-    private final UpdateUserProfileDetailsRequestDto updateUserProfileDetailsRequest;
+public class MapperUserProfileDetailsUpdateRequestToUser implements MapperToUser {
+    private final UserProfileDetailsUpdateRequestDto updateUserProfileDetailsRequest;
 
-    public MapperUpdateUserProfileDetailsRequestToUser(UpdateUserProfileDetailsRequestDto updateUserProfileDetailsRequest) {
+    public MapperUserProfileDetailsUpdateRequestToUser(UserProfileDetailsUpdateRequestDto updateUserProfileDetailsRequest) {
         this.updateUserProfileDetailsRequest = updateUserProfileDetailsRequest;
     }
 
