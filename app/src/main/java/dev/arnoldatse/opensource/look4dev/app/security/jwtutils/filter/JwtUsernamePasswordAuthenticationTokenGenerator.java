@@ -6,7 +6,7 @@ import dev.arnoldatse.opensource.look4dev.app.entities.UserUserProfile;
 import dev.arnoldatse.opensource.look4dev.app.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.app.security.mappers.MapperUserProfileToSimpleGrantedAuthority;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
-import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

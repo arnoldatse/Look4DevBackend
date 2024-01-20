@@ -76,6 +76,11 @@ public class CoreUserRepositoryImpl implements dev.arnoldatse.opensource.look4de
         userRepository.updatePassword(userId, password);
     }
 
+    @Override
+    public void updateUserPicture(String userId, String picture) {
+        userRepository.updatePicture(userId, picture);
+    }
+
     private dev.arnoldatse.opensource.look4dev.core.entities.user.User mapUserToCoreUser(User user){
         return new MapperUserToCoreUser(user).mapToUser();
     }

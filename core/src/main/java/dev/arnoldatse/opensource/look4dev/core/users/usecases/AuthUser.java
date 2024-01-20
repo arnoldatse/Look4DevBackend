@@ -6,7 +6,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.mappers.MapperUserProfileToString;
 import dev.arnoldatse.opensource.look4dev.core.http.FormatResponseDate;
-import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 
 import java.util.Optional;

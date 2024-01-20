@@ -2,7 +2,7 @@ package dev.arnoldatse.opensource.look4dev.app.controllerAdvisors;
 
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
-import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

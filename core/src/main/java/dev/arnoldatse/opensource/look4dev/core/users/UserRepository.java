@@ -18,4 +18,5 @@ public interface UserRepository {
     User saveUser(User user);
     User updateUserDetails(User user);
     void updateUserPassword(String userId, String password);
+    void updateUserPicture(String userId, String picture);
 }

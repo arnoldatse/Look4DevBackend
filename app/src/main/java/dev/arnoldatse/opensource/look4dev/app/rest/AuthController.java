@@ -8,7 +8,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserIdToFindRe
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserRegisterRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
-import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

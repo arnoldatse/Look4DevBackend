@@ -2,7 +2,7 @@ package dev.arnoldatse.opensource.look4dev.core.users.usecases;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserIdToFindRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
-import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests.SendUserResetPasswordUrlNotification;
 import dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests.UserResetPasswordExpirationDateGenerator;
 import dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests.UserResetPasswordIdGenerator;

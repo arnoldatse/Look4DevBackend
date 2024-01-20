@@ -4,7 +4,7 @@ import dev.arnoldatse.opensource.look4dev.app.dao.userUserProfile.UserUserProfil
 import dev.arnoldatse.opensource.look4dev.app.dao.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.app.security.CustomUserDetailsService;
 import dev.arnoldatse.opensource.look4dev.core.auth.TokenManager;
-import dev.arnoldatse.opensource.look4dev.core.http.exceptions.NotFoundException;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import jakarta.servlet.FilterChain;
