@@ -8,8 +8,8 @@ public class UserProfileDetailsResponseDto {
     private String email;
     private String pseudo;
     private String bio;
-    private String picturePath;
-    private String cvPath;
+    private String pictureUrl;
+    private String cvUrl;
     private int[] userProfilesIds;
     private UserUrlPlatformsRequestResponseDto platformsUrls;
 
@@ -53,20 +53,20 @@ public class UserProfileDetailsResponseDto {
         this.bio = bio;
     }
 
-    public String getPicturePath() {
-        return picturePath;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
-    public String getCvPath() {
-        return cvPath;
+    public String getCvUrl() {
+        return cvUrl;
     }
 
-    public void setCvPath(String cvPath) {
-        this.cvPath = cvPath;
+    public void setCvUrl(String cvUrl) {
+        this.cvUrl = cvUrl;
     }
 
     public int[] getUserProfilesIds() {

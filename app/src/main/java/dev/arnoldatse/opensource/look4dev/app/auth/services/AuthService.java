@@ -3,6 +3,7 @@ package dev.arnoldatse.opensource.look4dev.app.auth.services;
 import dev.arnoldatse.opensource.look4dev.core.auth.AuthResponse;
 import dev.arnoldatse.opensource.look4dev.core.auth.CredentialsRequest;
 import dev.arnoldatse.opensource.look4dev.core.auth.TokenManager;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
 import dev.arnoldatse.opensource.look4dev.core.users.UserPasswordEncoder;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserRegisterRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDto;
@@ -11,6 +12,7 @@ import dev.arnoldatse.opensource.look4dev.core.userProfile.UserProfileRepository
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.usecases.AuthUser;
 import dev.arnoldatse.opensource.look4dev.core.users.usecases.RegisterUser;
+import dev.arnoldatse.opensource.look4dev.details.StandardFileStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -33,7 +35,8 @@ public class AuthService {
     UserProfileRepository userProfileRepository;
 
     public UserResponseDto register(UserRegisterRequestDto userRegisterRequestDto) {
-        RegisterUser registerUser = new RegisterUser(userRegisterRequestDto, userRepository, userPasswordEncoder, userProfileRepository);
+        FileStorage fileStorage = new StandardFileStorage("");
+        RegisterUser registerUser = new RegisterUser(userRegisterRequestDto, userRepository, userPasswordEncoder, userProfileRepository, fileStorage);
         return registerUser.register();
     }
 

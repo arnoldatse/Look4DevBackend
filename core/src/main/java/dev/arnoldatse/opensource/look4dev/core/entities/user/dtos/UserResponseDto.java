@@ -11,9 +11,9 @@ public class UserResponseDto {
     private String firstname;
     private String email;
     private String pseudo;
-    private String picture;
+    private String pictureUrl;
     private String bio;
-    private String cv;
+    private String cvUrl;
     private Date createdAt;
     private Date updatedAt;
     private List<UserProfileResponseDto> userProfiles;
@@ -58,12 +58,12 @@ public class UserResponseDto {
         this.pseudo = pseudo;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setPictureUrl(String picture) {
+        this.pictureUrl = picture;
     }
 
     public String getBio() {
@@ -74,12 +74,12 @@ public class UserResponseDto {
         this.bio = bio;
     }
 
-    public String getCv() {
-        return cv;
+    public String getCvUrl() {
+        return cvUrl;
     }
 
-    public void setCv(String cv) {
-        this.cv = cv;
+    public void setCvUrl(String cv) {
+        this.cvUrl = cv;
     }
 
     public Date getCreatedAt() {

@@ -7,6 +7,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDet
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsUpdateRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.userProfileDetails.MapperUserToUserProfileDetailsResponse;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.updaters.UpdateUserWithUserProfileDetailsUpdateRequestDto;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.UserUserProfileRepository;
@@ -20,6 +21,7 @@ public class UpdateUserProfileDetails {
     private final UserUrlOtherPlatformRepository userUrlOtherPlatformRepository;
     private final UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
     private final UserUserProfileRepository userUserProfileRepository;
+    private final FileStorage fileStorage;
 
     public UpdateUserProfileDetails(
             UserProfileDetailsUpdateRequestDto updateUserProfileDetailsRequestDto,
@@ -27,14 +29,15 @@ public class UpdateUserProfileDetails {
             UserRepository userRepository,
             UserUrlOtherPlatformRepository userUrlOtherPlatformRepository,
             UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository,
-            UserUserProfileRepository userUserProfileRepository
-    ) {
+            UserUserProfileRepository userUserProfileRepository,
+            FileStorage fileStorage) {
         this.updateUserProfileDetailsRequestDto = updateUserProfileDetailsRequestDto;
         this.userId = userId;
         this.userRepository = userRepository;
         this.userUrlOtherPlatformRepository = userUrlOtherPlatformRepository;
         this.userUrlSupportedPlatformRepository = userUrlSupportedPlatformRepository;
         this.userUserProfileRepository = userUserProfileRepository;
+        this.fileStorage = fileStorage;
     }
 
     public UserProfileDetailsResponseDto execute() throws NotFoundException {
@@ -45,7 +48,7 @@ public class UpdateUserProfileDetails {
             deleteAllUserProfiles(user.getId());
             deleteAllUserUrlPlatforms(user.getId());
             User userCreated = userRepository.saveUser(user);
-            return new MapperUserToUserProfileDetailsResponse(userCreated).mapFromUser();
+            return new MapperUserToUserProfileDetailsResponse(userCreated, fileStorage).mapFromUser();
         }
         throw new NotFoundException("User not found");
     }

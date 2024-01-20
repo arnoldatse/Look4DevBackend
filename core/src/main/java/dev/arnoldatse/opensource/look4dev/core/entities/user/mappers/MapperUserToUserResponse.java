@@ -5,12 +5,17 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDt
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.dtos.UserProfileResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.mappers.MapperUserProfileToUserProfileResponse;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesTypesUrlsParts;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 
 public class MapperUserToUserResponse implements MapperFromUser<UserResponseDto> {
     private final User user;
+    private final FileStorage fileStorage;
 
-    public MapperUserToUserResponse(User user){
+    public MapperUserToUserResponse(User user, FileStorage fileStorage){
         this.user = user;
+        this.fileStorage = fileStorage;
     }
 
     @Override
@@ -21,9 +26,13 @@ public class MapperUserToUserResponse implements MapperFromUser<UserResponseDto>
         mappedUserResponse.setFirstname(user.getFirstname());
         mappedUserResponse.setEmail(user.getEmail());
         mappedUserResponse.setPseudo(user.getPseudo());
-        mappedUserResponse.setPicture(user.getPicture());
+        try {
+            mappedUserResponse.setPictureUrl(fileStorage.getUrl(FilesTypesUrlsParts.UserProfilePicture, user.getPicture()));
+        } catch (NotFoundException ignored) { }
         mappedUserResponse.setBio(user.getBio());
-        mappedUserResponse.setCv(user.getCv());
+        try {
+            mappedUserResponse.setCvUrl(fileStorage.getUrl(FilesTypesUrlsParts.UserProfileCv, user.getCv()));
+        } catch (NotFoundException ignored) { }
         mappedUserResponse.setCreatedAt(user.getCreatedAt());
         mappedUserResponse.setUpdatedAt(user.getUpdatedAt());
         mappedUserResponse.setUserProfiles(user.getUserProfiles().stream().map(this::mapUserProfileToUserProfileResponse).toList());

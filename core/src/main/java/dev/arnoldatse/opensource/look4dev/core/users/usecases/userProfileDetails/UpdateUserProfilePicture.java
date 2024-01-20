@@ -1,10 +1,11 @@
 package dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
-import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserPicturePathResponseDto;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserPictureUrlResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailToStoreException;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesDirectories;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesTypesUrlsParts;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.utils.RandomString;
@@ -24,7 +25,7 @@ public class UpdateUserProfilePicture {
         this.file = file;
     }
 
-    UserPicturePathResponseDto execute() throws Exception{
+    UserPictureUrlResponseDto execute() throws Exception{
         Optional<User> optionalUser = userRepository.findFirstById(userId);
         if (optionalUser.isPresent()) {
             String fileExtention = "";
@@ -33,7 +34,7 @@ public class UpdateUserProfilePicture {
             try {
                 fileStorage.store(file, fileName, fileExtention, FilesDirectories.UserProfilePicture);
                 userRepository.updateUserPicture(userId, fullFileName);
-                return new UserPicturePathResponseDto(fullFileName);
+                return new UserPictureUrlResponseDto(fileStorage.getUrl(FilesTypesUrlsParts.UserProfilePicture, fullFileName));
             }
             catch (FailToStoreException e){
                 throw new Exception("Fail to store file: "+e.getMessage());

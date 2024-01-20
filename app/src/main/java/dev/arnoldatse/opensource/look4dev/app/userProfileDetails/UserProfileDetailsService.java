@@ -1,5 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.app.userProfileDetails;
 
+import dev.arnoldatse.opensource.look4dev.app.FileStorageService;
 import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatformRepository;
 import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
@@ -30,19 +31,23 @@ public class UserProfileDetailsService {
     UserUserProfileRepository userUserProfileRepository;
     @Autowired
     UserPasswordEncoder userPasswordEncoder;
+    @Autowired
+    FileStorageService fileStorageService;
 
     public UserProfileDetailsResponseDto get() throws NotFoundException {
-        return new GetUserProfileDetails(userRepository, getAuthenticatedUserId()).execute();
+        return new GetUserProfileDetails(userRepository, getAuthenticatedUserId(), fileStorageService.getInstance()).execute();
     }
 
     public UserProfileDetailsResponseDto update(UserProfileDetailsUpdateRequestDto userProfileDetailsUpdateRequestDto) throws NotFoundException {
+
         return new UpdateUserProfileDetails(
                 userProfileDetailsUpdateRequestDto,
                 getAuthenticatedUserId(),
                 userRepository,
                 userUrlOtherPlatformRepository,
                 userUrlSupportedPlatformRepository,
-                userUserProfileRepository
+                userUserProfileRepository,
+                fileStorageService.getInstance()
         ).execute();
     }
 
