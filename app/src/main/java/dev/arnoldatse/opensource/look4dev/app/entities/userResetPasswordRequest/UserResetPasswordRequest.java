@@ -11,7 +11,6 @@ import java.util.Date;
 public class UserResetPasswordRequest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(name = "expiration_date", nullable = false)
@@ -21,7 +20,7 @@ public class UserResetPasswordRequest {
     @CreationTimestamp
     private Date createdAt;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

@@ -35,17 +35,28 @@ public class CoreUserResetPasswordRequestRepositoryImpl implements dev.arnoldats
     }
 
     @Override
-    public dev.arnoldatse.opensource.look4dev.core.entities.userResetPasswordRequest.UserResetPasswordRequest findFirstByUserId(String userId) {
-        return null;
+    public Optional<dev.arnoldatse.opensource.look4dev.core.entities.userResetPasswordRequest.UserResetPasswordRequest> findFirstByUserId(String userId) {
+        UserResetPasswordRequest userResetPasswordRequest = userResetPasswordRequestRepository.findFirstByUserId(userId);
+        if (userResetPasswordRequest!= null) {
+            MapperToUserResetPasswordRequest mapperUserResetPasswordRequestToCoreUserResetPasswordRequest = new MapperUserResetPasswordRequestToCoreUserResetPasswordRequest(userResetPasswordRequest);
+            return Optional.of(mapperUserResetPasswordRequestToCoreUserResetPasswordRequest.mapToUserResetPasswordRequest());
+        }
+        return Optional.empty();
     }
 
     @Override
     public List<dev.arnoldatse.opensource.look4dev.core.entities.userResetPasswordRequest.UserResetPasswordRequest> findAllByUserId(String userId) {
-        return null;
+        List<UserResetPasswordRequest> userResetPasswordRequests = userResetPasswordRequestRepository.findAllByUserId(userId);
+        return userResetPasswordRequests.stream().map(
+                userResetPasswordRequest -> new MapperUserResetPasswordRequestToCoreUserResetPasswordRequest(userResetPasswordRequest)
+                        .mapToUserResetPasswordRequest()
+                )
+                .toList();
     }
 
     @Override
+    @Transactional
     public void deleteAllByUserId(String userId) {
-
+        userResetPasswordRequestRepository.deleteAllByUserId(userId);
     }
 }

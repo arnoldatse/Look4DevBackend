@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface UserResetPasswordRequestRepository {
     void save(UserResetPasswordRequest userResetPasswordRequest);
     Optional<UserResetPasswordRequest> findById(String id);
-    UserResetPasswordRequest findFirstByUserId(String userId);
+    Optional<UserResetPasswordRequest> findFirstByUserId(String userId);
     List<UserResetPasswordRequest> findAllByUserId(String userId);
     void deleteAllByUserId(String userId);
 }

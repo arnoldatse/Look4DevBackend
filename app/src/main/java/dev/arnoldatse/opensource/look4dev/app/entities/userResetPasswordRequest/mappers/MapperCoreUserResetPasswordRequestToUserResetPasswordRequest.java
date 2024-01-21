@@ -16,9 +16,10 @@ public class MapperCoreUserResetPasswordRequestToUserResetPasswordRequest implem
     @Override
     public UserResetPasswordRequest mapFromUserResetPasswordRequest() {
         MapperFromUser<User> coreUserToUserMapper = new MapperCoreUserToUser(userResetPasswordRequestCore.getUser());
-        UserResetPasswordRequest userResetPasswordRequestJPA = new UserResetPasswordRequest();
-        userResetPasswordRequestJPA.setExpirationDate(userResetPasswordRequestCore.getExpirationDate());
-        userResetPasswordRequestJPA.setUser(coreUserToUserMapper.mapFromUser());
-        return userResetPasswordRequestJPA;
+        UserResetPasswordRequest userResetPasswordRequest = new UserResetPasswordRequest();
+        userResetPasswordRequest.setId(userResetPasswordRequestCore.getId());
+        userResetPasswordRequest.setExpirationDate(userResetPasswordRequestCore.getExpirationDate());
+        userResetPasswordRequest.setUser(coreUserToUserMapper.mapFromUser());
+        return userResetPasswordRequest;
     }
 }
