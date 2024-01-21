@@ -12,7 +12,7 @@ import dev.arnoldatse.opensource.look4dev.core.userProfile.UserProfileRepository
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.usecases.AuthUser;
 import dev.arnoldatse.opensource.look4dev.core.users.usecases.RegisterUser;
-import dev.arnoldatse.opensource.look4dev.details.StandardFileStorage;
+import dev.arnoldatse.opensource.look4dev.details.fileStorage.StandardFileStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

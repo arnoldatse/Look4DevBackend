@@ -1,4 +1,4 @@
-package dev.arnoldatse.opensource.look4dev.details;
+package dev.arnoldatse.opensource.look4dev.details.fileStorage;
 
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailToStoreException;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
