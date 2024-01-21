@@ -26,15 +26,6 @@ public class UserProfile {
     @OneToMany(mappedBy = "userProfile")
     private List<UserUserProfile> userUserProfiles;
 
-    /*@ManyToMany(cascade = {
-        CascadeType.PERSIST,
-        CascadeType.MERGE,
-        CascadeType.REFRESH,
-        CascadeType.DETACH,
-    })
-    @JoinTable(name = "users_user_profiles", joinColumns = @JoinColumn(name = "user_profile_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users;*/
-
     public int getId() {
         return id;
     }

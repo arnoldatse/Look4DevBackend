@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -17,22 +18,22 @@ public class CoreUserProfileRepositoryImpl implements dev.arnoldatse.opensource.
     private UserProfileRepository userProfileRepository;
 
     @Override
-    public dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile findById(int id) {
-        return null;
+    public Optional<dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile> findById(int id) {
+        Optional<UserProfile> optionalUserProfile = userProfileRepository.findById(id);
+        return optionalUserProfile.map(userProfile -> new MapperUserProfileToCoreUserProfile(userProfile).mapToUserProfile());
     }
 
     @Override
     public List<dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile> findAllById(int[] ids) {
         List<Integer> listIds = Arrays.stream(ids).boxed().collect(Collectors.toList());
         Iterable<UserProfile> iterableUserProfiles = userProfileRepository.findAllById(listIds);
-        List<dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile> userProfileSimples = new ArrayList<>();
 
-
+        List<dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile> coreUserProfiles = new ArrayList<>();
         iterableUserProfiles.forEach(userProfile ->{
             MapperToUserProfile mapperUserProfileToCoreUserProfileSimple = new MapperUserProfileToCoreUserProfile(userProfile);
-            userProfileSimples.add(mapperUserProfileToCoreUserProfileSimple.mapToUserProfile());
+            coreUserProfiles.add(mapperUserProfileToCoreUserProfileSimple.mapToUserProfile());
         });
 
-        return userProfileSimples;
+        return coreUserProfiles;
     }
 }

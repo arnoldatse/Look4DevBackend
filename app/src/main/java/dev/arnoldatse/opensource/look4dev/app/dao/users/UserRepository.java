@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface UserRepository extends CrudRepository<User, String> {
     User findFirstByEmailOrPseudo(String email, String pseudo);
     User findFirstByEmail(String email);
+    User findFirstByPseudo(String pseudo);
 
     @Modifying
     @Query("update User u set u.password = ?2 where u.id = ?1")

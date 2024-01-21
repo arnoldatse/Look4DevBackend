@@ -6,6 +6,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDet
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsUpdateRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.RepositoryException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class UserProfileDetailsController {
     }
 
     @PatchMapping("/update")
-    public UserProfileDetailsResponseDto update(@RequestBody UserProfileDetailsUpdateRequestDto userUpdateProfileDetailsRequest) throws NotFoundException {
+    public UserProfileDetailsResponseDto update(@RequestBody UserProfileDetailsUpdateRequestDto userUpdateProfileDetailsRequest) throws NotFoundException, RepositoryException {
         return userProfileDetailsService.update(userUpdateProfileDetailsRequest);
     }
     @PatchMapping("/update-password")

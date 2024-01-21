@@ -9,6 +9,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.userProfile
 import dev.arnoldatse.opensource.look4dev.core.entities.user.updaters.UpdateUserWithUserProfileDetailsUpdateRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.RepositoryException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.UserUserProfileRepository;
 
@@ -40,14 +41,14 @@ public class UpdateUserProfileDetails {
         this.fileStorage = fileStorage;
     }
 
-    public UserProfileDetailsResponseDto execute() throws NotFoundException {
+    public UserProfileDetailsResponseDto execute() throws NotFoundException, RepositoryException {
         Optional<User> optionalUser = userRepository.findFirstById(userId);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             new UpdateUserWithUserProfileDetailsUpdateRequestDto(user, updateUserProfileDetailsRequestDto).update();
             deleteAllUserProfiles(user.getId());
             deleteAllUserUrlPlatforms(user.getId());
-            User userCreated = userRepository.saveUser(user);
+            User userCreated = userRepository.updateUserDetails(user);
             return new MapperUserToUserProfileDetailsResponse(userCreated, fileStorage).mapFromUser();
         }
         throw new NotFoundException("User not found");

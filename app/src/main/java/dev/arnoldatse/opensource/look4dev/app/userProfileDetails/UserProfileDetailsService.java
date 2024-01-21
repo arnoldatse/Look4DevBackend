@@ -1,6 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.app.userProfileDetails;
 
-import dev.arnoldatse.opensource.look4dev.app.FileStorageService;
+import dev.arnoldatse.opensource.look4dev.app.services.FileStorageService;
 import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatformRepository;
 import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
@@ -9,6 +9,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDet
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsUpdateRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.RepositoryException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserPasswordEncoder;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.UserUserProfileRepository;
@@ -38,7 +39,7 @@ public class UserProfileDetailsService {
         return new GetUserProfileDetails(userRepository, getAuthenticatedUserId(), fileStorageService.getInstance()).execute();
     }
 
-    public UserProfileDetailsResponseDto update(UserProfileDetailsUpdateRequestDto userProfileDetailsUpdateRequestDto) throws NotFoundException {
+    public UserProfileDetailsResponseDto update(UserProfileDetailsUpdateRequestDto userProfileDetailsUpdateRequestDto) throws NotFoundException, RepositoryException {
 
         return new UpdateUserProfileDetails(
                 userProfileDetailsUpdateRequestDto,
