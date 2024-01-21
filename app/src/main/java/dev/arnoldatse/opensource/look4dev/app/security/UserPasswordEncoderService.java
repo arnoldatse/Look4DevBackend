@@ -14,4 +14,9 @@ public class UserPasswordEncoderService implements UserPasswordEncoder {
     public String encode(String password) {
         return passwordEncoder.encode(password);
     }
+
+    @Override
+    public boolean matches(String passwordRequest, String encodedPassword) {
+        return passwordEncoder.matches(passwordRequest, encodedPassword);
+    }
 }

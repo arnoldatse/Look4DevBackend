@@ -9,6 +9,17 @@ public class UserProfile {
 
     private Date createdAt;
 
+    public UserProfile() {
+    }
+
+    public UserProfile(UserProfile userProfile) {
+        if(userProfile!=null){
+            this.id = userProfile.getId();
+            this.name = userProfile.getName();
+            this.createdAt = (Date) userProfile.getCreatedAt().clone();
+        }
+    }
+
     public int getId() {
         return id;
     }
@@ -31,5 +42,9 @@ public class UserProfile {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public UserProfile clone(){
+        return new UserProfile(this);
     }
 }

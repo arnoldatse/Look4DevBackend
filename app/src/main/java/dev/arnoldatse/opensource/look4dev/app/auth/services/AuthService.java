@@ -1,18 +1,17 @@
 package dev.arnoldatse.opensource.look4dev.app.auth.services;
 
+import dev.arnoldatse.opensource.look4dev.app.services.FileStorageService;
 import dev.arnoldatse.opensource.look4dev.core.auth.AuthResponse;
 import dev.arnoldatse.opensource.look4dev.core.auth.CredentialsRequest;
 import dev.arnoldatse.opensource.look4dev.core.auth.TokenManager;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.users.UserPasswordEncoder;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserRegisterRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDto;
-import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserTokenInfosDto;
 import dev.arnoldatse.opensource.look4dev.core.userProfile.UserProfileRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
-import dev.arnoldatse.opensource.look4dev.core.users.usecases.AuthUser;
+import dev.arnoldatse.opensource.look4dev.core.users.usecases.auth.AuthenticateUser;
 import dev.arnoldatse.opensource.look4dev.core.users.usecases.RegisterUser;
-import dev.arnoldatse.opensource.look4dev.details.fileStorage.StandardFileStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -33,10 +32,11 @@ public class AuthService {
     UserPasswordEncoder userPasswordEncoder;
     @Autowired
     UserProfileRepository userProfileRepository;
+    @Autowired
+    FileStorageService fileStorageService;
 
     public UserResponseDto register(UserRegisterRequestDto userRegisterRequestDto) {
-        FileStorage fileStorage = new StandardFileStorage("");
-        RegisterUser registerUser = new RegisterUser(userRegisterRequestDto, userRepository, userPasswordEncoder, userProfileRepository, fileStorage);
+        RegisterUser registerUser = new RegisterUser(userRegisterRequestDto, userRepository, userPasswordEncoder, userProfileRepository, fileStorageService.getInstance());
         return registerUser.register();
     }
 
@@ -46,14 +46,6 @@ public class AuthService {
                 credentialsRequest.getPassword()
         );
         Authentication authentication = this.authenticationManager.authenticate(authenticationRequest);
-        String[] profiles = authentication.getAuthorities().stream()
-                .map(authority -> authority.getAuthority().substring(5))
-                .toArray(String[]::new);
-        try {
-            return new AuthUser(tokenManager, (UserTokenInfosDto) authentication.getPrincipal(), userRepository, profiles).authenticate();
-        }
-        catch (Exception ex){
-            throw new BadCredentialsException("Bad credentials");
-        }
+        return new AuthenticateUser((User) authentication.getPrincipal(), tokenManager).authenticate();
     }
 }

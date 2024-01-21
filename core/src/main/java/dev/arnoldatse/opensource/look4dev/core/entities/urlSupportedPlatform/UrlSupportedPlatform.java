@@ -10,6 +10,20 @@ public class UrlSupportedPlatform {
     private Date createdAt;
     private Date updatedAt;
 
+    public UrlSupportedPlatform() {
+    }
+
+    public UrlSupportedPlatform(UrlSupportedPlatform urlSupportedPlatform) {
+        if (urlSupportedPlatform != null) {
+            this.id = urlSupportedPlatform.getId();
+            this.name = urlSupportedPlatform.getName();
+            this.label = urlSupportedPlatform.getLabel();
+            this.logo = urlSupportedPlatform.getLogo();
+            this.createdAt = (Date) urlSupportedPlatform.getCreatedAt().clone();
+            this.updatedAt = (Date) urlSupportedPlatform.getUpdatedAt().clone();
+        }
+    }
+
     public int getId() {
         return id;
     }
@@ -56,5 +70,9 @@ public class UrlSupportedPlatform {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public UrlSupportedPlatform clone() {
+        return new UrlSupportedPlatform(this);
     }
 }

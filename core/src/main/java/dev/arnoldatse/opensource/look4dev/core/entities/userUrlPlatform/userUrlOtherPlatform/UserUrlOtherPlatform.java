@@ -8,6 +8,18 @@ public class UserUrlOtherPlatform {
     private String label;
     private Date createdAt;
 
+    public UserUrlOtherPlatform() {
+    }
+
+    public UserUrlOtherPlatform(UserUrlOtherPlatform userUrlOtherPlatform) {
+        if (userUrlOtherPlatform != null) {
+            this.id = userUrlOtherPlatform.getId();
+            this.url = userUrlOtherPlatform.getId();
+            this.label = userUrlOtherPlatform.getId();
+            this.createdAt = (Date) userUrlOtherPlatform.getCreatedAt().clone();
+        }
+    }
+
     public String getId() {
         return id;
     }
@@ -38,5 +50,9 @@ public class UserUrlOtherPlatform {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public UserUrlOtherPlatform clone() {
+        return new UserUrlOtherPlatform(this);
     }
 }

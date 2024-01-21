@@ -10,6 +10,19 @@ public class UserUrlSupportedPlatform {
     private String url;
     private Date createdAt;
 
+    public UserUrlSupportedPlatform() {
+    }
+
+    public UserUrlSupportedPlatform(UserUrlSupportedPlatform userUrlSupportedPlatform) {
+        if(userUrlSupportedPlatform!=null){
+            this.id = userUrlSupportedPlatform.getId();
+            this.urlSupportedPlatform = userUrlSupportedPlatform.getUrlSupportedPlatform().clone();
+            this.url = userUrlSupportedPlatform.getUrl();
+            this.createdAt = (Date) userUrlSupportedPlatform.getCreatedAt().clone();
+        }
+
+    }
+
     public String getId() {
         return id;
     }
@@ -40,5 +53,9 @@ public class UserUrlSupportedPlatform {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public UserUrlSupportedPlatform clone(){
+        return new UserUrlSupportedPlatform(this);
     }
 }

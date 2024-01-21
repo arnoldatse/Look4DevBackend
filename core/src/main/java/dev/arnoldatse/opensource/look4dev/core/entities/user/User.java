@@ -3,6 +3,7 @@ package dev.arnoldatse.opensource.look4dev.core.entities.user;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile;
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.UserUrlPlatforms;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,8 +19,29 @@ public class User {
     private String cv;
     private Date createdAt;
     private Date updatedAt;
-    private List<UserProfile> userProfiles;
-    private UserUrlPlatforms platformsUrls;
+    private List<UserProfile> userProfiles = new ArrayList<>();
+    private UserUrlPlatforms platformsUrls = new UserUrlPlatforms(new ArrayList<>(), new ArrayList<>());
+
+    public User() {
+    }
+
+    public User(User user) {
+        if(user!=null){
+            this.id = user.getId();
+            this.lastname = user.getLastname();
+            this.firstname = user.getFirstname();
+            this.email = user.getEmail();
+            this.password = user.getPassword();
+            this.pseudo = user.getPseudo();
+            this.picture = user.getPicture();
+            this.bio = user.getBio();
+            this.cv = user.getCv();
+            this.createdAt = (Date) user.getCreatedAt().clone();
+            this.updatedAt = (Date) user.getUpdatedAt().clone();
+            this.userProfiles = user.getUserProfiles().stream().map(UserProfile::clone).toList();
+            this.platformsUrls = user.platformsUrls.clone();
+        }
+    }
 
     public String getId() {
         return id;
@@ -127,6 +149,10 @@ public class User {
 
     public void setPlatformsUrls(UserUrlPlatforms platformsUrls) {
         this.platformsUrls = platformsUrls;
+    }
+
+    public User clone(){
+        return new User(this);
     }
 
     @Override

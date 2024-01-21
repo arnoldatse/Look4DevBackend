@@ -2,7 +2,6 @@ package dev.arnoldatse.opensource.look4dev.app.security.jwtutils.filter;
 
 import dev.arnoldatse.opensource.look4dev.app.dao.userUserProfile.UserUserProfileRepository;
 import dev.arnoldatse.opensource.look4dev.app.dao.users.UserRepository;
-import dev.arnoldatse.opensource.look4dev.app.security.CustomUserDetailsService;
 import dev.arnoldatse.opensource.look4dev.core.auth.TokenManager;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -26,8 +25,6 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     private TokenManager tokenManager;
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
 
     @Autowired
     private UserRepository userRepository;
