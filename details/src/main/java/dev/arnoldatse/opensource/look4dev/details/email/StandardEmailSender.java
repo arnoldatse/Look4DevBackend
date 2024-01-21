@@ -1,11 +1,11 @@
 package dev.arnoldatse.opensource.look4dev.details.email;
 
 import dev.arnoldatse.opensource.look4dev.core.email.EmailSender;
-import dev.arnoldatse.opensource.look4dev.core.email.FailToSendEmailException;
+import dev.arnoldatse.opensource.look4dev.core.email.FailedToSendEmailException;
 
 public class StandardEmailSender implements EmailSender {
     @Override
-    public void send(String recipient, String subject, Object body) throws FailToSendEmailException {
+    public void send(String recipient, String subject, Object body) throws FailedToSendEmailException {
 
     }
 }

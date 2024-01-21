@@ -4,7 +4,7 @@ import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundEx
 
 public interface FileStorage {
     String rootDir = "/";
-    void store(Object file, String fileName, String fileExtension, FilesDirectories dir) throws FailToStoreException;
+    void store(Object file, String fileName, String fileExtension, FilesDirectories dir) throws FailedToStoreFileException;
     void get(String fileName, FilesDirectories dir) throws NotFoundException;
     String getUrl(FilesTypesUrlsParts filesTypesUrlsParts, String fileName) throws NotFoundException;
 }

@@ -1,5 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.app.auth.services;
 
+import dev.arnoldatse.opensource.look4dev.core.email.FailedToSendEmailException;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserIdToFindRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
@@ -17,7 +18,7 @@ public class UserResetPasswordRequestService {
     @Autowired
     UserRepository userRepository;
 
-    public DefaultHttpResponse create(UserIdToFindRequestDto userIdToFindRequest) throws NotFoundException {
+    public DefaultHttpResponse create(UserIdToFindRequestDto userIdToFindRequest) throws NotFoundException, FailedToSendEmailException {
         return new ResetUserPassword(userResetPasswordRequestRepository, userRepository, userIdToFindRequest, new StandardEmailSender()).execute();
     }
 }

@@ -1,6 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.details.fileStorage;
 
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailToStoreException;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailedToStoreFileException;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesDirectories;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesTypesUrlsParts;
@@ -14,7 +14,7 @@ public class StandardFileStorage implements FileStorage {
     }
 
     @Override
-    public void store(Object file, String fileName, String fileExtension, FilesDirectories dir) throws FailToStoreException {
+    public void store(Object file, String fileName, String fileExtension, FilesDirectories dir) throws FailedToStoreFileException {
 
     }
 

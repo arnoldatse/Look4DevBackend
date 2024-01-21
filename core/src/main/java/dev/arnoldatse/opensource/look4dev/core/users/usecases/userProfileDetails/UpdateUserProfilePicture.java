@@ -2,7 +2,7 @@ package dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetail
 
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserPictureUrlResponseDto;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailToStoreException;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailedToStoreFileException;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesDirectories;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesTypesUrlsParts;
@@ -36,8 +36,8 @@ public class UpdateUserProfilePicture {
                 userRepository.updateUserPicture(userId, fullFileName);
                 return new UserPictureUrlResponseDto(fileStorage.getUrl(FilesTypesUrlsParts.UserProfilePicture, fullFileName));
             }
-            catch (FailToStoreException e){
-                throw new Exception("Fail to store file: "+e.getMessage());
+            catch (FailedToStoreFileException e){
+                throw new Exception("Failed to store file: "+e.getMessage());
             }
 
         }

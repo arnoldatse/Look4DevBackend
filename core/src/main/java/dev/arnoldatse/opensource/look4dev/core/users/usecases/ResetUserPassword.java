@@ -1,6 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.core.users.usecases;
 
 import dev.arnoldatse.opensource.look4dev.core.email.EmailSender;
+import dev.arnoldatse.opensource.look4dev.core.email.FailedToSendEmailException;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserIdToFindRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
@@ -26,7 +27,7 @@ public class ResetUserPassword {
         this.emailSender = emailSender;
     }
 
-    public DefaultHttpResponse execute() throws NotFoundException {
+    public DefaultHttpResponse execute() throws NotFoundException, FailedToSendEmailException {
         Optional<User> optionalUser = userRepository.findFirstByEmailOrPseudo(userIdToFindRequestDto.idToFind());
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
@@ -35,9 +36,7 @@ public class ResetUserPassword {
             deleteAllUserResetPasswordRequests(user);
             UserResetPasswordRequest userResetPasswordRequest = new UserResetPasswordRequest(userResetPasswordId, expirationDate, new Date(), user);
             userResetPasswordRequestRepository.save(userResetPasswordRequest);
-            try {
-                new SendUserResetPasswordUrlNotificationByEmail(emailSender).sendUrl(userResetPasswordRequest);
-            } catch (Exception ignored) {}
+            new SendUserResetPasswordUrlNotificationByEmail(emailSender).sendUrl(userResetPasswordRequest);
             return new DefaultHttpResponse(HttpCode.OK, "Reset password request sent");
         }
         throw new NotFoundException("User not found");

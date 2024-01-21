@@ -1,6 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.app.controllerAdvisors;
 
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailToStoreException;
+import dev.arnoldatse.opensource.look4dev.core.email.FailedToSendEmailException;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailedToStoreFileException;
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
@@ -33,8 +34,14 @@ public class ControllerAdvisors {
     }
 
     @ResponseBody
-    @ExceptionHandler(FailToStoreException.class)
-    public ResponseEntity<DefaultHttpResponse> failToStoreException(HttpServletRequest request, Throwable ex) {
+    @ExceptionHandler(FailedToStoreFileException.class)
+    public ResponseEntity<DefaultHttpResponse> failedToStoreException(HttpServletRequest request, Throwable ex) {
+        return new ResponseEntity<>(new DefaultHttpResponse(HttpCode.INTERNAL_SERVER_ERROR, ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(FailedToSendEmailException.class)
+    public ResponseEntity<DefaultHttpResponse> failedToSendEmailException(HttpServletRequest request, Throwable ex) {
         return new ResponseEntity<>(new DefaultHttpResponse(HttpCode.INTERNAL_SERVER_ERROR, ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
