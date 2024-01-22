@@ -7,7 +7,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDet
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsUpdateRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.userProfileDetails.MapperUserToUserProfileDetailsResponse;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.updaters.UpdateUserWithUserProfileDetailsUpdateRequestDto;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorageAdapter;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.RepositoryException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.UserUserProfileRepository;
@@ -19,7 +19,7 @@ public class UpdateUserProfileDetails {
     private final UserUrlOtherPlatformRepository userUrlOtherPlatformRepository;
     private final UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
     private final UserUserProfileRepository userUserProfileRepository;
-    private final FileStorage fileStorage;
+    private final FileStorageAdapter fileStorage;
 
     public UpdateUserProfileDetails(
             UserProfileDetailsUpdateRequestDto updateUserProfileDetailsRequestDto,
@@ -28,7 +28,7 @@ public class UpdateUserProfileDetails {
             UserUrlOtherPlatformRepository userUrlOtherPlatformRepository,
             UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository,
             UserUserProfileRepository userUserProfileRepository,
-            FileStorage fileStorage) {
+            FileStorageAdapter fileStorage) {
         this.updateUserProfileDetailsRequestDto = updateUserProfileDetailsRequestDto;
         this.user = user;
         this.userRepository = userRepository;

@@ -8,7 +8,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.userProfile
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.UserUrlPlatforms;
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatform;
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatform;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorageAdapter;
 
 import java.util.List;
 
@@ -16,13 +16,13 @@ public class GetUserProfileDetails {
     private final User user;
     private final UserUrlOtherPlatformRepository userUrlOtherPlatformRepository;
     private final UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
-    private final FileStorage fileStorage;
+    private final FileStorageAdapter fileStorage;
 
     public GetUserProfileDetails(
             User user,
             UserUrlOtherPlatformRepository userUrlOtherPlatformRepository,
             UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository,
-            FileStorage fileStorage
+            FileStorageAdapter fileStorage
     ) {
         this.user = user;
         this.userUrlOtherPlatformRepository = userUrlOtherPlatformRepository;

@@ -1,6 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.core.users.usecases;
 
-import dev.arnoldatse.opensource.look4dev.core.email.EmailSender;
+import dev.arnoldatse.opensource.look4dev.core.email.EmailSenderAdapter;
 import dev.arnoldatse.opensource.look4dev.core.email.FailedToSendEmailException;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserIdToFindRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
@@ -18,9 +18,9 @@ public class ResetUserPassword {
     private final UserResetPasswordRequestRepository userResetPasswordRequestRepository;
     private final UserRepository userRepository;
     private final UserIdToFindRequestDto userIdToFindRequestDto;
-    private final EmailSender emailSender;
+    private final EmailSenderAdapter emailSender;
 
-    public ResetUserPassword(UserResetPasswordRequestRepository userResetPasswordRequestRepository, UserRepository userRepository, UserIdToFindRequestDto userIdToFindRequestDto, EmailSender emailSender) {
+    public ResetUserPassword(UserResetPasswordRequestRepository userResetPasswordRequestRepository, UserRepository userRepository, UserIdToFindRequestDto userIdToFindRequestDto, EmailSenderAdapter emailSender) {
         this.userResetPasswordRequestRepository = userResetPasswordRequestRepository;
         this.userRepository = userRepository;
         this.userIdToFindRequestDto = userIdToFindRequestDto;

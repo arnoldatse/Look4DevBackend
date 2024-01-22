@@ -1,13 +1,13 @@
 package dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests;
 
-import dev.arnoldatse.opensource.look4dev.core.email.EmailSender;
+import dev.arnoldatse.opensource.look4dev.core.email.EmailSenderAdapter;
 import dev.arnoldatse.opensource.look4dev.core.email.FailedToSendEmailException;
 import dev.arnoldatse.opensource.look4dev.core.entities.userResetPasswordRequest.UserResetPasswordRequest;
 
 public class SendUserResetPasswordUrlNotificationByEmail implements SendUserResetPasswordUrlNotification {
-    private final EmailSender emailSender;
+    private final EmailSenderAdapter emailSender;
 
-    public SendUserResetPasswordUrlNotificationByEmail(EmailSender emailSender) {
+    public SendUserResetPasswordUrlNotificationByEmail(EmailSenderAdapter emailSender) {
         this.emailSender = emailSender;
     }
 

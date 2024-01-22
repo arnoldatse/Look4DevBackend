@@ -1,6 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.core.users.usecases;
 
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorageAdapter;
 import dev.arnoldatse.opensource.look4dev.core.users.UserPasswordEncoder;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDto;
@@ -16,9 +16,9 @@ public class RegisterUser {
     private final UserRepository userRepository;
     private final UserPasswordEncoder userPasswordEncoder;
     private final UserProfileRepository userProfileRepository;
-    private final FileStorage fileStorage;
+    private final FileStorageAdapter fileStorage;
 
-    public RegisterUser(UserRegisterRequestDto userRegisterRequestDto, UserRepository userRepository, UserPasswordEncoder userPasswordEncoder, UserProfileRepository userProfileRepository, FileStorage fileStorage){
+    public RegisterUser(UserRegisterRequestDto userRegisterRequestDto, UserRepository userRepository, UserPasswordEncoder userPasswordEncoder, UserProfileRepository userProfileRepository, FileStorageAdapter fileStorage){
         this.userRegisterRequestDto = userRegisterRequestDto;
         this.userRepository = userRepository;
         this.userPasswordEncoder = userPasswordEncoder;

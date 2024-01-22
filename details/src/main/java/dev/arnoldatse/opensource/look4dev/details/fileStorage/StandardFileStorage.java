@@ -1,12 +1,12 @@
 package dev.arnoldatse.opensource.look4dev.details.fileStorage;
 
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailedToStoreFileException;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorageAdapter;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesDirectories;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesTypesUrlsParts;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 
-public class StandardFileStorage implements FileStorage {
+public class StandardFileStorage implements FileStorageAdapter {
     private final String appBaseUrl;
 
     public StandardFileStorage(String appBaseUrl) {

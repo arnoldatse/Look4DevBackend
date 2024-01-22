@@ -8,7 +8,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.mappers.Mapp
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.UserUrlPlatforms;
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.dtos.UserUrlPlatformsRequestResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.mappers.MapperUserUrlPlatformsToUserUrlPlatformsRequestResponse;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorage;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorageAdapter;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesTypesUrlsParts;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 
@@ -16,9 +16,9 @@ import java.util.List;
 
 public class MapperUserToUserProfileDetailsResponse implements MapperFromUser<UserProfileDetailsResponseDto> {
     private final User user;
-    private final FileStorage fileStorage;
+    private final FileStorageAdapter fileStorage;
 
-    public MapperUserToUserProfileDetailsResponse(User user, FileStorage fileStorage) {
+    public MapperUserToUserProfileDetailsResponse(User user, FileStorageAdapter fileStorage) {
         this.user = user;
         this.fileStorage = fileStorage;
     }
