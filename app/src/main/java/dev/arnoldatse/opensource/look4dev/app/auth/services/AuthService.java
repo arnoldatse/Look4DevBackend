@@ -1,6 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.app.auth.services;
 
-import dev.arnoldatse.opensource.look4dev.app.services.FileStorageService;
+import dev.arnoldatse.opensource.look4dev.app.services.fileStorage.FileStorageService;
 import dev.arnoldatse.opensource.look4dev.core.auth.AuthResponse;
 import dev.arnoldatse.opensource.look4dev.core.auth.CredentialsRequest;
 import dev.arnoldatse.opensource.look4dev.core.auth.TokenManager;
@@ -36,7 +36,11 @@ public class AuthService {
     FileStorageService fileStorageService;
 
     public UserResponseDto register(UserRegisterRequestDto userRegisterRequestDto) {
-        RegisterUser registerUser = new RegisterUser(userRegisterRequestDto, userRepository, userPasswordEncoder, userProfileRepository, fileStorageService.getInstance());
+        RegisterUser registerUser = new RegisterUser(
+                userRegisterRequestDto, userRepository,
+                userPasswordEncoder, userProfileRepository,
+                fileStorageService.getInstance()
+        );
         return registerUser.register();
     }
 
