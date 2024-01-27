@@ -1,10 +1,10 @@
 package dev.arnoldatse.opensource.look4dev.app.services.fileStorage;
 
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailedToStoreFileException;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.adapters.FileStorageGetterAdapter;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.adapters.FileStoragePersistAndUrlGetterAdapter;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.enums.FilesDirectories;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.enums.FilesTypesUrlsParts;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.FailedToStoreFileException;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.adapters.FileStorageGetterAdapter;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.adapters.FileStoragePersistAndUrlGetterAdapter;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesDirectories;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesTypesUrlsParts;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

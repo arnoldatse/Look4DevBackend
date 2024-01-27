@@ -2,16 +2,15 @@ package dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetail
 
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsFileUrlResponseDto;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.*;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.adapters.FileStoragePersistAndUrlGetterAdapter;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.enums.FilesDirectories;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.enums.FilesTypesUrlsParts;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.FailedToStoreFileException;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.adapters.FileStoragePersistAndUrlGetterAdapter;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesDirectories;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesTypesUrlsParts;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.CheckSupportedFileExtension;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.FileExtensionNotSupportedException;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.utils.RandomString;
-
-import java.util.Arrays;
 
 public class UpdateUserProfilePicture<T> {
     private final User user;
@@ -29,7 +28,7 @@ public class UpdateUserProfilePicture<T> {
     }
 
     public UserProfileDetailsFileUrlResponseDto execute() throws FailedToStoreFileException, NotFoundException, FileExtensionNotSupportedException {
-        if (checkFileExtensionCompatibility()) {
+        if (CheckSupportedFileExtension.check(fileExtention, UserProfilePictureAuthorizedExtensions.get())){
             deleteOldProfilePicture();
 
             String fileName = generateFileName();
@@ -40,11 +39,6 @@ public class UpdateUserProfilePicture<T> {
             return new UserProfileDetailsFileUrlResponseDto(fileStorage.getUrl(FilesTypesUrlsParts.UserProfilePicture, fullFileName));
         }
         throw new FileExtensionNotSupportedException();
-    }
-
-    private boolean checkFileExtensionCompatibility() {
-        return Arrays.stream(UserProfilePictureAuthorizedExtensions.get())
-                .anyMatch(fileExtention::equalsIgnoreCase);
     }
 
     private void deleteOldProfilePicture() {

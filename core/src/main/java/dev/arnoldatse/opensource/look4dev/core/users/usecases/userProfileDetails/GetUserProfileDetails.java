@@ -8,7 +8,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.userProfile
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.UserUrlPlatforms;
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatform;
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatform;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.adapters.FileStorageUrlGetterAdapter;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.adapters.FileStorageUrlGetterAdapter;
 
 import java.util.List;
 

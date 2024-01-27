@@ -1,7 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.app.controllerAdvisors;
 
 import dev.arnoldatse.opensource.look4dev.core.email.FailedToSendEmailException;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailedToStoreFileException;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.FailedToStoreFileException;
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.FileExtensionNotSupportedException;

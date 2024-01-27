@@ -5,8 +5,8 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDt
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.dtos.UserProfileResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.mappers.MapperUserProfileToUserProfileResponse;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.adapters.FileStorageUrlGetterAdapter;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.enums.FilesTypesUrlsParts;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.adapters.FileStorageUrlGetterAdapter;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesTypesUrlsParts;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 
 public class MapperUserToUserResponse implements MapperFromUser<UserResponseDto> {
