@@ -18,4 +18,5 @@ public interface UserRepository {
     User updateUserDetails(User user) throws RepositoryException;
     void updateUserPassword(String userId, String password);
     void updateUserPicture(String userId, String picture);
+    void updateUserCv(String userId, String cv);
 }

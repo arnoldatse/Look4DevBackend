@@ -8,7 +8,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.userProfile
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.UserUrlPlatforms;
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatform;
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatform;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorageAdapter;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.adapters.FileStorageUrlGetterAdapter;
 
 import java.util.List;
 
@@ -16,23 +16,23 @@ public class GetUserProfileDetails {
     private final User user;
     private final UserUrlOtherPlatformRepository userUrlOtherPlatformRepository;
     private final UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
-    private final FileStorageAdapter fileStorage;
+    private final FileStorageUrlGetterAdapter fileStorageUrl;
 
     public GetUserProfileDetails(
             User user,
             UserUrlOtherPlatformRepository userUrlOtherPlatformRepository,
             UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository,
-            FileStorageAdapter fileStorage
+            FileStorageUrlGetterAdapter fileStorageUrl
     ) {
         this.user = user;
         this.userUrlOtherPlatformRepository = userUrlOtherPlatformRepository;
         this.userUrlSupportedPlatformRepository = userUrlSupportedPlatformRepository;
-        this.fileStorage = fileStorage;
+        this.fileStorageUrl = fileStorageUrl;
     }
 
     public UserProfileDetailsResponseDto execute() {
         getUserPlatformsUrls();
-        return new MapperUserToUserProfileDetailsResponse(user, fileStorage).mapFromUser();
+        return new MapperUserToUserProfileDetailsResponse(user, fileStorageUrl).mapFromUser();
     }
 
     private void getUserPlatformsUrls(){

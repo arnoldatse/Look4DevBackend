@@ -1,25 +1,29 @@
 package dev.arnoldatse.opensource.look4dev.app.userProfileDetails;
 
 import dev.arnoldatse.opensource.look4dev.app.services.AuthenticatedUserService;
-import dev.arnoldatse.opensource.look4dev.app.services.FileStorageService;
+import dev.arnoldatse.opensource.look4dev.app.services.fileStorage.FileStorageService;
 import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatformRepository;
 import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository;
-import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.PasswordUpdateRequestDto;
+import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsFileUrlResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsUpdateRequestDto;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailedToStoreFileException;
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.FileExtensionNotSupportedException;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.RepositoryException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserPasswordEncoder;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.UserUserProfileRepository;
-import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.GetUserProfileDetails;
-import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.UpdateUserPassword;
-import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.UpdateUserProfileDetails;
+import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.*;
+import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.profileCv.UpdateUserProfileCv;
+import dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails.profilePicture.UpdateUserProfilePicture;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Objects;
 
 @Service
 public class UserProfileDetailsService {
@@ -39,7 +43,12 @@ public class UserProfileDetailsService {
     AuthenticatedUserService authenticatedUserService;
 
     public UserProfileDetailsResponseDto get() {
-        return new GetUserProfileDetails(authenticatedUserService.getAuthenticatedUser(), userUrlOtherPlatformRepository, userUrlSupportedPlatformRepository, fileStorageService.getInstance()).execute();
+        return new GetUserProfileDetails(
+                authenticatedUserService.getAuthenticatedUser(),
+                userUrlOtherPlatformRepository,
+                userUrlSupportedPlatformRepository,
+                fileStorageService.getInstance()
+        ).execute();
     }
 
     public UserProfileDetailsResponseDto update(UserProfileDetailsUpdateRequestDto userProfileDetailsUpdateRequestDto) throws NotFoundException, RepositoryException {
@@ -61,6 +70,26 @@ public class UserProfileDetailsService {
                 passwordUpdateRequestDto,
                 userRepository,
                 userPasswordEncoder
+        ).execute();
+    }
+
+    public UserProfileDetailsFileUrlResponseDto updatePicture(MultipartFile picture) throws FailedToStoreFileException, NotFoundException, FileExtensionNotSupportedException {
+        return new UpdateUserProfilePicture<>(
+                authenticatedUserService.getAuthenticatedUser(),
+                userRepository,
+                fileStorageService.getInstance(),
+                picture,
+                Objects.requireNonNull(picture.getContentType()).split("/")[1]
+        ).execute();
+    }
+
+    public UserProfileDetailsFileUrlResponseDto updateCv(MultipartFile cv) throws FailedToStoreFileException, NotFoundException, FileExtensionNotSupportedException {
+        return new UpdateUserProfileCv<>(
+                authenticatedUserService.getAuthenticatedUser(),
+                userRepository,
+                fileStorageService.getInstance(),
+                cv,
+                Objects.requireNonNull(cv.getContentType()).split("/")[1]
         ).execute();
     }
 }

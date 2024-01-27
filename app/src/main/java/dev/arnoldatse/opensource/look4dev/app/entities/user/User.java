@@ -32,9 +32,11 @@ public class User {
     @Column(unique = true)
     private String pseudo;
 
-    private String picture;
     private String bio;
+
     private String cv;
+
+    private String picture;
 
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp

@@ -1,7 +1,7 @@
-package dev.arnoldatse.opensource.look4dev.core.fileStorage;
+package dev.arnoldatse.opensource.look4dev.core.fileStorage.enums;
 
 public enum FilesTypesUrlsParts {
-    UserProfilePicture("/user-profiles/"),
+    UserProfilePicture("/user-profile-picture/"),
     UserProfileCv("/user-cv/");
 
     private final String value;
