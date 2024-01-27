@@ -1,4 +1,4 @@
-package dev.arnoldatse.opensource.look4dev.core.fileStorage.enums;
+package dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums;
 
 public enum FilesDirectories {
     UserProfilePicture("userProfilesPictures"),
