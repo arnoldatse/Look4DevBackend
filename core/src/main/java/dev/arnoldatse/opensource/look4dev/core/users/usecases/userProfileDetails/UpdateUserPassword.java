@@ -26,7 +26,7 @@ public class UpdateUserPassword {
             return new DefaultHttpResponse(HttpCode.OK, "Password updated with success");
         }
         catch (Exception e){
-            throw new Exception("Error occured during password updatting: "+e.getMessage());
+            throw new Exception("Error occurred during password updating: "+e.getMessage());
         }
     }
 }
