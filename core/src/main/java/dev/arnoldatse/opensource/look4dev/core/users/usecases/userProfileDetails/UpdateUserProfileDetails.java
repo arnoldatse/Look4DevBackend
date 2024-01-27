@@ -7,7 +7,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDet
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsUpdateRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.mappers.userProfileDetails.MapperUserToUserProfileDetailsResponse;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.updaters.UpdateUserWithUserProfileDetailsUpdateRequestDto;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorageAdapter;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.adapters.FileStorageUrlGetterAdapter;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.RepositoryException;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
 import dev.arnoldatse.opensource.look4dev.core.users.UserUserProfileRepository;
@@ -19,7 +19,7 @@ public class UpdateUserProfileDetails {
     private final UserUrlOtherPlatformRepository userUrlOtherPlatformRepository;
     private final UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
     private final UserUserProfileRepository userUserProfileRepository;
-    private final FileStorageAdapter fileStorage;
+    private final FileStorageUrlGetterAdapter fileStorageUrl;
 
     public UpdateUserProfileDetails(
             UserProfileDetailsUpdateRequestDto updateUserProfileDetailsRequestDto,
@@ -28,14 +28,14 @@ public class UpdateUserProfileDetails {
             UserUrlOtherPlatformRepository userUrlOtherPlatformRepository,
             UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository,
             UserUserProfileRepository userUserProfileRepository,
-            FileStorageAdapter fileStorage) {
+            FileStorageUrlGetterAdapter fileStorageUrl) {
         this.updateUserProfileDetailsRequestDto = updateUserProfileDetailsRequestDto;
         this.user = user;
         this.userRepository = userRepository;
         this.userUrlOtherPlatformRepository = userUrlOtherPlatformRepository;
         this.userUrlSupportedPlatformRepository = userUrlSupportedPlatformRepository;
         this.userUserProfileRepository = userUserProfileRepository;
-        this.fileStorage = fileStorage;
+        this.fileStorageUrl = fileStorageUrl;
     }
 
     public UserProfileDetailsResponseDto execute() throws RepositoryException {
@@ -43,7 +43,7 @@ public class UpdateUserProfileDetails {
         deleteAllUserProfiles(user.getId());
         deleteAllUserUrlPlatforms(user.getId());
         User userCreated = userRepository.updateUserDetails(user);
-        return new MapperUserToUserProfileDetailsResponse(userCreated, fileStorage).mapFromUser();
+        return new MapperUserToUserProfileDetailsResponse(userCreated, fileStorageUrl).mapFromUser();
     }
 
     private void deleteAllUserProfiles(String userId) {

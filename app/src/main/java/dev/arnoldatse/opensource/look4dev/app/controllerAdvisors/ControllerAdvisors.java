@@ -4,6 +4,7 @@ import dev.arnoldatse.opensource.look4dev.core.email.FailedToSendEmailException;
 import dev.arnoldatse.opensource.look4dev.core.fileStorage.FailedToStoreFileException;
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.FileExtensionNotSupportedException;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.RepositoryException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,6 +38,12 @@ public class ControllerAdvisors {
     @ExceptionHandler(FailedToStoreFileException.class)
     public ResponseEntity<DefaultHttpResponse> failedToStoreException(HttpServletRequest request, Throwable ex) {
         return new ResponseEntity<>(new DefaultHttpResponse(HttpCode.INTERNAL_SERVER_ERROR, ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(FileExtensionNotSupportedException.class)
+    public ResponseEntity<DefaultHttpResponse> fileExtensionNotSupported(HttpServletRequest request, Throwable ex) {
+        return new ResponseEntity<>(new DefaultHttpResponse(HttpCode.FORBIDDEN, ex.getMessage()), HttpStatus.FORBIDDEN);
     }
 
     @ResponseBody

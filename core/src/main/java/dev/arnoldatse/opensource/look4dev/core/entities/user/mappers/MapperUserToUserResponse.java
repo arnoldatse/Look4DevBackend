@@ -5,17 +5,17 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserResponseDt
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.dtos.UserProfileResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.mappers.MapperUserProfileToUserProfileResponse;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FileStorageAdapter;
-import dev.arnoldatse.opensource.look4dev.core.fileStorage.FilesTypesUrlsParts;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.adapters.FileStorageUrlGetterAdapter;
+import dev.arnoldatse.opensource.look4dev.core.fileStorage.enums.FilesTypesUrlsParts;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 
 public class MapperUserToUserResponse implements MapperFromUser<UserResponseDto> {
     private final User user;
-    private final FileStorageAdapter fileStorage;
+    private final FileStorageUrlGetterAdapter fileStorageUrlGetterAdapter;
 
-    public MapperUserToUserResponse(User user, FileStorageAdapter fileStorage){
+    public MapperUserToUserResponse(User user, FileStorageUrlGetterAdapter fileStorageUrlGetterAdapter){
         this.user = user;
-        this.fileStorage = fileStorage;
+        this.fileStorageUrlGetterAdapter = fileStorageUrlGetterAdapter;
     }
 
     @Override
@@ -27,11 +27,11 @@ public class MapperUserToUserResponse implements MapperFromUser<UserResponseDto>
         mappedUserResponse.setEmail(user.getEmail());
         mappedUserResponse.setPseudo(user.getPseudo());
         try {
-            mappedUserResponse.setPictureUrl(fileStorage.getUrl(FilesTypesUrlsParts.UserProfilePicture, user.getPicture()));
+            mappedUserResponse.setPictureUrl(fileStorageUrlGetterAdapter.getUrl(FilesTypesUrlsParts.UserProfilePicture, user.getPicture()));
         } catch (NotFoundException ignored) { }
         mappedUserResponse.setBio(user.getBio());
         try {
-            mappedUserResponse.setCvUrl(fileStorage.getUrl(FilesTypesUrlsParts.UserProfileCv, user.getCv()));
+            mappedUserResponse.setCvUrl(fileStorageUrlGetterAdapter.getUrl(FilesTypesUrlsParts.UserProfileCv, user.getCv()));
         } catch (NotFoundException ignored) { }
         mappedUserResponse.setCreatedAt(user.getCreatedAt());
         mappedUserResponse.setUpdatedAt(user.getUpdatedAt());
