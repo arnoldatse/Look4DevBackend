@@ -4,7 +4,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsFileUrlResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.FailedToStoreFileException;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.adapters.FileStoragePersistAndUrlGetterAdapter;
-import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesDirectories;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesTypesDirectories;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesTypesUrlsParts;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.CheckSupportedFileExtension;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.FileExtensionNotSupportedException;
@@ -34,7 +34,7 @@ public class UpdateUserProfilePicture<T> {
             String fileName = generateFileName();
             String fullFileName = fileName + "." + fileExtention;
 
-            fileStorage.store(picture, fileName, fileExtention, FilesDirectories.UserProfilePicture);
+            fileStorage.store(picture, fileName, fileExtention, FilesTypesDirectories.UserProfilePicture);
             userRepository.updateUserPicture(user.getId(), fullFileName);
             return new UserProfileDetailsFileUrlResponseDto(fileStorage.getUrl(FilesTypesUrlsParts.UserProfilePicture, fullFileName));
         }
@@ -44,7 +44,7 @@ public class UpdateUserProfilePicture<T> {
     private void deleteOldProfilePicture() {
         String oldProfilePicture = user.getPicture();
         if (oldProfilePicture != null) {
-            fileStorage.delete(oldProfilePicture, FilesDirectories.UserProfilePicture);
+            fileStorage.delete(oldProfilePicture, FilesTypesDirectories.UserProfilePicture);
         }
     }
 

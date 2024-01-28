@@ -5,7 +5,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDet
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.CheckSupportedFileExtension;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.FailedToStoreFileException;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.adapters.FileStoragePersistAndUrlGetterAdapter;
-import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesDirectories;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesTypesDirectories;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesTypesUrlsParts;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.FileExtensionNotSupportedException;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
@@ -34,7 +34,7 @@ public class UpdateUserProfileCv<T> {
             String fileName = generateFileName();
             String fullFileName = fileName + "." + fileExtention;
 
-            fileStorage.store(cv, fileName, fileExtention, FilesDirectories.UserProfileCv);
+            fileStorage.store(cv, fileName, fileExtention, FilesTypesDirectories.UserProfileCv);
             userRepository.updateUserCv(user.getId(), fullFileName);
             return new UserProfileDetailsFileUrlResponseDto(fileStorage.getUrl(FilesTypesUrlsParts.UserProfileCv, fullFileName));
         }
@@ -45,7 +45,7 @@ public class UpdateUserProfileCv<T> {
     private void deleteOldCv() {
         String oldCv = user.getCv();
         if (oldCv != null) {
-            fileStorage.delete(oldCv, FilesDirectories.UserProfileCv);
+            fileStorage.delete(oldCv, FilesTypesDirectories.UserProfileCv);
         }
     }
 

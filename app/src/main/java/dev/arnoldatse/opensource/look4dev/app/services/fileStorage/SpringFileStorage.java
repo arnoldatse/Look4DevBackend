@@ -3,7 +3,7 @@ package dev.arnoldatse.opensource.look4dev.app.services.fileStorage;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.FailedToStoreFileException;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.adapters.FileStorageGetterAdapter;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.adapters.FileStoragePersistAndUrlGetterAdapter;
-import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesDirectories;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesTypesDirectories;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesTypesUrlsParts;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import org.springframework.core.io.Resource;
@@ -28,7 +28,7 @@ public class SpringFileStorage implements FileStoragePersistAndUrlGetterAdapter<
     }
 
     @Override
-    public void store(MultipartFile file, String fileName, String fileExtension, FilesDirectories dir) throws FailedToStoreFileException {
+    public void store(MultipartFile file, String fileName, String fileExtension, FilesTypesDirectories dir) throws FailedToStoreFileException {
         if (file != null && !file.isEmpty()) {
             Path destinationFile = rootLocation.resolve(
                     Paths.get(dir.getValue(), fileName + "." + fileExtension)
@@ -46,12 +46,12 @@ public class SpringFileStorage implements FileStoragePersistAndUrlGetterAdapter<
     }
 
     @Override
-    public void delete(String fileName, FilesDirectories dir) {
+    public void delete(String fileName, FilesTypesDirectories dir) {
         FileSystemUtils.deleteRecursively(rootLocation.resolve(Paths.get(dir.getValue(), fileName)).toFile());
     }
 
     @Override
-    public Resource get(String fileName, FilesDirectories dir) throws NotFoundException {
+    public Resource get(String fileName, FilesTypesDirectories dir) throws NotFoundException {
         Path file = rootLocation.resolve(Paths.get(dir.getValue(), fileName));
         try {
             Resource resource = new UrlResource(file.toUri());
