@@ -1,12 +1,12 @@
 package dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums;
 
-public enum FilesDirectories {
+public enum FilesTypesDirectories {
     UserProfilePicture("userProfilesPictures"),
     UserProfileCv("userProfilesCvs");
 
     private final String value;
 
-    FilesDirectories(String value) {
+    FilesTypesDirectories(String value) {
         this.value = value;
     }
 
