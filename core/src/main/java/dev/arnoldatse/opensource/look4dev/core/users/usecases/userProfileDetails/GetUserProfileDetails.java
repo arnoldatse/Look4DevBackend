@@ -16,23 +16,23 @@ public class GetUserProfileDetails {
     private final User user;
     private final UserUrlOtherPlatformRepository userUrlOtherPlatformRepository;
     private final UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
-    private final FileStorageUrlGetterAdapter fileStorageUrl;
+    private final FileStorageUrlGetterAdapter fileStorageUrlGetter;
 
     public GetUserProfileDetails(
             User user,
             UserUrlOtherPlatformRepository userUrlOtherPlatformRepository,
             UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository,
-            FileStorageUrlGetterAdapter fileStorageUrl
+            FileStorageUrlGetterAdapter fileStorageUrlGetter
     ) {
         this.user = user;
         this.userUrlOtherPlatformRepository = userUrlOtherPlatformRepository;
         this.userUrlSupportedPlatformRepository = userUrlSupportedPlatformRepository;
-        this.fileStorageUrl = fileStorageUrl;
+        this.fileStorageUrlGetter = fileStorageUrlGetter;
     }
 
     public UserProfileDetailsResponseDto execute() {
         getUserPlatformsUrls();
-        return new MapperUserToUserProfileDetailsResponse(user, fileStorageUrl).mapFromUser();
+        return new MapperUserToUserProfileDetailsResponse(user, fileStorageUrlGetter).mapFromUser();
     }
 
     private void getUserPlatformsUrls(){

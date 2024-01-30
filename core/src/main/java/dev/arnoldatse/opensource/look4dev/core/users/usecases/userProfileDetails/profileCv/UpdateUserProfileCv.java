@@ -15,14 +15,14 @@ import dev.arnoldatse.opensource.look4dev.core.utils.RandomString;
 public class UpdateUserProfileCv<T> {
     private final User user;
     private final UserRepository userRepository;
-    private final FileStoragePersistAndUrlGetterAdapter<T> fileStorage;
+    private final FileStoragePersistAndUrlGetterAdapter<T> fileStoragePersistWithUrlGetter;
     private final T cv;
     private final String fileExtention;
 
-    public UpdateUserProfileCv(User user, UserRepository userRepository, FileStoragePersistAndUrlGetterAdapter<T> fileStorage, T cv, String fileExtention) {
+    public UpdateUserProfileCv(User user, UserRepository userRepository, FileStoragePersistAndUrlGetterAdapter<T> fileStoragePersistWithUrlGetter, T cv, String fileExtention) {
         this.user = user;
         this.userRepository = userRepository;
-        this.fileStorage = fileStorage;
+        this.fileStoragePersistWithUrlGetter = fileStoragePersistWithUrlGetter;
         this.cv = cv;
         this.fileExtention = fileExtention;
     }
@@ -34,9 +34,9 @@ public class UpdateUserProfileCv<T> {
             String fileName = generateFileName();
             String fullFileName = fileName + "." + fileExtention;
 
-            fileStorage.store(cv, fileName, fileExtention, FilesTypesDirectories.UserProfileCv);
+            fileStoragePersistWithUrlGetter.store(cv, fileName, fileExtention, FilesTypesDirectories.UserProfileCv);
             userRepository.updateUserCv(user.getId(), fullFileName);
-            return new UserProfileDetailsFileUrlResponseDto(fileStorage.getUrl(FilesTypesUrlsParts.UserProfileCv, fullFileName));
+            return new UserProfileDetailsFileUrlResponseDto(fileStoragePersistWithUrlGetter.getUrl(FilesTypesUrlsParts.UserProfileCv, fullFileName));
         }
         throw new FileExtensionNotSupportedException();
 
@@ -45,7 +45,7 @@ public class UpdateUserProfileCv<T> {
     private void deleteOldCv() {
         String oldCv = user.getCv();
         if (oldCv != null) {
-            fileStorage.delete(oldCv, FilesTypesDirectories.UserProfileCv);
+            fileStoragePersistWithUrlGetter.delete(oldCv, FilesTypesDirectories.UserProfileCv);
         }
     }
 
