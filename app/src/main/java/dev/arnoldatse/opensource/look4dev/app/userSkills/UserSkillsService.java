@@ -3,6 +3,7 @@ package dev.arnoldatse.opensource.look4dev.app.userSkills;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SkillsRequestIdsDto;
 import dev.arnoldatse.opensource.look4dev.app.services.AuthenticatedUserService;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SimpleSkillResponseDto;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.ForbiddenException;
 import dev.arnoldatse.opensource.look4dev.core.userSkills.UserSkillRepository;
 import dev.arnoldatse.opensource.look4dev.core.userSkills.usecases.AddUserSkills;
 import dev.arnoldatse.opensource.look4dev.core.userSkills.usecases.GetUserSkills;
@@ -23,13 +24,15 @@ public class UserSkillsService {
         this.userSkillRepository = userSkillRepository;
     }
 
-    public List<SimpleSkillResponseDto> getUserSkills() {
-        return new GetUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), userSkillRepository).execute();
+    public List<SimpleSkillResponseDto> getUserSkills() throws ForbiddenException {
+        return new GetUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfiles(), userSkillRepository).execute();
     }
-    public List<SimpleSkillResponseDto> addUserSkills(SkillsRequestIdsDto skillsRequestIdsDto) {
-        return new AddUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), skillsRequestIdsDto, userSkillRepository).execute();
+
+    public List<SimpleSkillResponseDto> addUserSkills(SkillsRequestIdsDto skillsRequestIdsDto) throws ForbiddenException {
+        return new AddUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfiles(), skillsRequestIdsDto, userSkillRepository).execute();
     }
-    public List<SimpleSkillResponseDto> removeUserSkills(SkillsRequestIdsDto skillsRequestIdsDto) {
-        return new RemoveUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), skillsRequestIdsDto, userSkillRepository).execute();
+
+    public List<SimpleSkillResponseDto> removeUserSkills(SkillsRequestIdsDto skillsRequestIdsDto) throws ForbiddenException {
+        return new RemoveUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfiles(), skillsRequestIdsDto, userSkillRepository).execute();
     }
 }
