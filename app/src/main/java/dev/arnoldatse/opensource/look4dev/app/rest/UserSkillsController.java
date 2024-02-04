@@ -3,6 +3,7 @@ package dev.arnoldatse.opensource.look4dev.app.rest;
 import dev.arnoldatse.opensource.look4dev.app.userSkills.UserSkillsService;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SimpleSkillResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SkillsRequestIdsDto;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.ForbiddenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +20,17 @@ public class UserSkillsController {
     }
 
     @GetMapping
-    public List<SimpleSkillResponseDto> getUserSkills() {
+    public List<SimpleSkillResponseDto> getUserSkills() throws ForbiddenException {
         return userSkillsService.getUserSkills();
     }
 
     @PostMapping("/add")
-    public List<SimpleSkillResponseDto> addUserSkills(@RequestBody SkillsRequestIdsDto skillsRequestIdsDto) {
+    public List<SimpleSkillResponseDto> addUserSkills(@RequestBody SkillsRequestIdsDto skillsRequestIdsDto) throws ForbiddenException {
         return userSkillsService.addUserSkills(skillsRequestIdsDto);
     }
 
     @PostMapping("/remove")
-    public List<SimpleSkillResponseDto> removeUserSkills(@RequestBody SkillsRequestIdsDto skillsRequestIdsDto) {
+    public List<SimpleSkillResponseDto> removeUserSkills(@RequestBody SkillsRequestIdsDto skillsRequestIdsDto) throws ForbiddenException {
         return userSkillsService.removeUserSkills(skillsRequestIdsDto);
     }
 }
