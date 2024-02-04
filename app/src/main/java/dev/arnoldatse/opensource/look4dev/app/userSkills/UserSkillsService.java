@@ -25,14 +25,14 @@ public class UserSkillsService {
     }
 
     public List<SimpleSkillResponseDto> getUserSkills() throws ForbiddenException {
-        return new GetUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfiles(), userSkillRepository).execute();
+        return new GetUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfilesNames(), userSkillRepository).execute();
     }
 
     public List<SimpleSkillResponseDto> addUserSkills(SkillsRequestIdsDto skillsRequestIdsDto) throws ForbiddenException {
-        return new AddUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfiles(), skillsRequestIdsDto, userSkillRepository).execute();
+        return new AddUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfilesNames(), skillsRequestIdsDto, userSkillRepository).execute();
     }
 
     public List<SimpleSkillResponseDto> removeUserSkills(SkillsRequestIdsDto skillsRequestIdsDto) throws ForbiddenException {
-        return new RemoveUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfiles(), skillsRequestIdsDto, userSkillRepository).execute();
+        return new RemoveUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfilesNames(), skillsRequestIdsDto, userSkillRepository).execute();
     }
 }
