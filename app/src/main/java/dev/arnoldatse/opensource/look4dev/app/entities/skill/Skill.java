@@ -1,21 +1,35 @@
-package dev.arnoldatse.opensource.look4dev.core.entities.skill;
+package dev.arnoldatse.opensource.look4dev.app.entities.skill;
+
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
+@Entity
+@Table(name = "skills")
 public class Skill {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-    private Date CreatedAt;
 
-    public Skill(int id, String name, Date createdAt) {
-        this.id = id;
-        this.name = name;
-        CreatedAt = createdAt;
+    @Column(unique = true, nullable = false)
+    private String name;
+
+    @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
+    private Date createdAt;
+
+
+    public Skill() {
     }
 
     public Skill(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Skill(int id) {
+        this.id = id;
     }
 
     public int getId() {
@@ -35,10 +49,10 @@ public class Skill {
     }
 
     public Date getCreatedAt() {
-        return CreatedAt;
+        return createdAt;
     }
 
     public void setCreatedAt(Date createdAt) {
-        CreatedAt = createdAt;
+        this.createdAt = createdAt;
     }
 }
