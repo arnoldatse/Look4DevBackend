@@ -27,20 +27,24 @@ import java.util.Objects;
 
 @Service
 public class UserProfileDetailsService {
+    private final UserRepository userRepository;
+    private final UserUrlOtherPlatformRepository userUrlOtherPlatformRepository;
+    private final UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
+    private final UserUserProfileRepository userUserProfileRepository;
+    private final UserPasswordEncoder userPasswordEncoder;
+    private final FileStorageService fileStorageService;
+    private final AuthenticatedUserService authenticatedUserService;
+
     @Autowired
-    UserRepository userRepository;
-    @Autowired
-    UserUrlOtherPlatformRepository userUrlOtherPlatformRepository;
-    @Autowired
-    UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
-    @Autowired
-    UserUserProfileRepository userUserProfileRepository;
-    @Autowired
-    UserPasswordEncoder userPasswordEncoder;
-    @Autowired
-    FileStorageService fileStorageService;
-    @Autowired
-    AuthenticatedUserService authenticatedUserService;
+    public UserProfileDetailsService(UserRepository userRepository, UserUrlOtherPlatformRepository userUrlOtherPlatformRepository, UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository, UserUserProfileRepository userUserProfileRepository, UserPasswordEncoder userPasswordEncoder, FileStorageService fileStorageService, AuthenticatedUserService authenticatedUserService) {
+        this.userRepository = userRepository;
+        this.userUrlOtherPlatformRepository = userUrlOtherPlatformRepository;
+        this.userUrlSupportedPlatformRepository = userUrlSupportedPlatformRepository;
+        this.userUserProfileRepository = userUserProfileRepository;
+        this.userPasswordEncoder = userPasswordEncoder;
+        this.fileStorageService = fileStorageService;
+        this.authenticatedUserService = authenticatedUserService;
+    }
 
     public UserProfileDetailsResponseDto get() {
         return new GetUserProfileDetails(
