@@ -5,6 +5,7 @@ import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.FailedToS
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.FileExtensionNotSupportedException;
+import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.ForbiddenException;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.RepositoryException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +27,12 @@ public class ControllerAdvisors {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<DefaultHttpResponse> notFoundException(HttpServletRequest request, Throwable ex) {
         return new ResponseEntity<>(new DefaultHttpResponse(HttpCode.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<DefaultHttpResponse> forbiddenException(HttpServletRequest request, Throwable ex) {
+        return new ResponseEntity<>(new DefaultHttpResponse(HttpCode.FORBIDDEN, ex.getMessage()), HttpStatus.FORBIDDEN);
     }
 
     @ResponseBody
