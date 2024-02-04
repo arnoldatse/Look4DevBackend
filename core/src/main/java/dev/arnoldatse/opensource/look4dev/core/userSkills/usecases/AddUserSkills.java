@@ -1,10 +1,10 @@
-package dev.arnoldatse.opensource.look4dev.core.userSkill.usecases;
+package dev.arnoldatse.opensource.look4dev.core.userSkills.usecases;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.Skill;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SimpleSkillResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SkillsRequestIdsDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.mappers.MapperSkillToSimpleSkillResponse;
-import dev.arnoldatse.opensource.look4dev.core.userSkill.UserSkillRepository;
+import dev.arnoldatse.opensource.look4dev.core.userSkills.UserSkillRepository;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class AddUserSkills {
     }
 
     public List<SimpleSkillResponseDto> execute() {
-        List<Skill> skills = userSkillRepository.addUserSkills(userId, skillsRequestIds);
+        List<Skill> skills = userSkillRepository.addUserSkills(userId, skillsRequestIds.ids());
         return skills.stream().map(skill -> new MapperSkillToSimpleSkillResponse(skill).mapFromSkill()).toList();
     }
 }
