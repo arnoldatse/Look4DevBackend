@@ -2,8 +2,8 @@ package dev.arnoldatse.opensource.look4dev.app.userProfileDetails;
 
 import dev.arnoldatse.opensource.look4dev.app.services.AuthenticatedUserService;
 import dev.arnoldatse.opensource.look4dev.app.services.fileStorage.FileStorageService;
-import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatformRepository;
-import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository;
+import dev.arnoldatse.opensource.look4dev.core.userUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatformRepository;
+import dev.arnoldatse.opensource.look4dev.core.userUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.PasswordUpdateRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsFileUrlResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsResponseDto;

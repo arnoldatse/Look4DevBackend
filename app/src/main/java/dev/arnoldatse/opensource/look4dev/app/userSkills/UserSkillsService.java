@@ -4,10 +4,10 @@ import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SkillsRequest
 import dev.arnoldatse.opensource.look4dev.app.services.AuthenticatedUserService;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SimpleSkillResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.ForbiddenException;
-import dev.arnoldatse.opensource.look4dev.core.userSkills.UserSkillRepository;
-import dev.arnoldatse.opensource.look4dev.core.userSkills.usecases.AddUserSkills;
-import dev.arnoldatse.opensource.look4dev.core.userSkills.usecases.GetUserSkills;
-import dev.arnoldatse.opensource.look4dev.core.userSkills.usecases.RemoveUserSkills;
+import dev.arnoldatse.opensource.look4dev.core.userExperiencesAndSkills.userSkills.UserSkillRepository;
+import dev.arnoldatse.opensource.look4dev.core.userExperiencesAndSkills.userSkills.usecases.AddUserSkills;
+import dev.arnoldatse.opensource.look4dev.core.userExperiencesAndSkills.userSkills.usecases.GetUserSkills;
+import dev.arnoldatse.opensource.look4dev.core.userExperiencesAndSkills.userSkills.usecases.RemoveUserSkills;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ public class UserSkillsService {
     }
 
     public List<SimpleSkillResponseDto> addUserSkills(SkillsRequestIdsDto skillsRequestIdsDto) throws ForbiddenException {
-        return new AddUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfilesNames(), skillsRequestIdsDto, userSkillRepository).execute();
+        return new AddUserSkills(authenticatedUserService.getAuthenticatedUser().getId(), authenticatedUserService.getAuthenticatedUserProfilesNames(), skillsRequestIdsDto, userSkillRepository).execute(false);
     }
 
     public List<SimpleSkillResponseDto> removeUserSkills(SkillsRequestIdsDto skillsRequestIdsDto) throws ForbiddenException {
