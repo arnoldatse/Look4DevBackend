@@ -8,18 +8,20 @@ import java.util.Date;
 public class UserSkill {
     private String id;
     private User user;
+    private boolean fromExperience;
     private Skill skill;
     private Date createdAt;
 
-    public UserSkill(String id, User user, Skill skill, Date createdAt) {
+    public UserSkill(String id, User user, boolean frommExperience, Skill skill, Date createdAt) {
         this.id = id;
         this.user = user;
         this.skill = skill;
         this.createdAt = createdAt;
     }
-    public UserSkill(String id, User user, Skill skill) {
+    public UserSkill(String id, User user, boolean fromExperience, Skill skill) {
         this.id = id;
         this.user = user;
+        this.fromExperience = fromExperience;
         this.skill = skill;
     }
 
@@ -33,6 +35,14 @@ public class UserSkill {
 
     public User getUser() {
         return user;
+    }
+
+    public boolean isFromExperience() {
+        return fromExperience;
+    }
+
+    public void setFromExperience(boolean frommExperience) {
+        this.fromExperience = frommExperience;
     }
 
     public void setUser(User user) {

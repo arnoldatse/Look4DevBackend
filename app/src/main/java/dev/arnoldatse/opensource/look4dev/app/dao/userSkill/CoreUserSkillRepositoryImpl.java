@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class CoreUserSkillRepositoryImpl implements dev.arnoldatse.opensource.look4dev.core.userSkills.UserSkillRepository {
+public class CoreUserSkillRepositoryImpl implements dev.arnoldatse.opensource.look4dev.core.userExperiencesAndSkills.userSkills.UserSkillRepository {
     private final UserSkillRepository userSkillRepository;
     private final SkillRepository skillRepository;
 
@@ -37,7 +37,7 @@ public class CoreUserSkillRepositoryImpl implements dev.arnoldatse.opensource.lo
 
     @Override
     @Transactional
-    public List<dev.arnoldatse.opensource.look4dev.core.entities.skill.Skill> addUserSkills(String userId, int[] skillsIds) {
+    public List<dev.arnoldatse.opensource.look4dev.core.entities.skill.Skill> addUserSkills(String userId, int[] skillsIds, boolean fromExperience) {
         User user = new User();
         user.setId(userId);
 
@@ -49,7 +49,7 @@ public class CoreUserSkillRepositoryImpl implements dev.arnoldatse.opensource.lo
 
         for (int skillId : skillsIdsToAdd) {
             Optional<Skill> optionalSkill = skillRepository.findById(skillId);
-            optionalSkill.ifPresent(skill -> userSkillsToAdd.add(new UserSkill(user, skill)));
+            optionalSkill.ifPresent(skill -> userSkillsToAdd.add(new UserSkill(user, skill, fromExperience)));
         }
         userSkillRepository.saveAll(userSkillsToAdd);
         return this.getUserSkills(userId);

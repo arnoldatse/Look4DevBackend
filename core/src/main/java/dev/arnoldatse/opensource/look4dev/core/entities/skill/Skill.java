@@ -17,6 +17,9 @@ public class Skill {
         this.id = id;
         this.name = name;
     }
+    public Skill(int id) {
+        this.id = id;
+    }
 
     public int getId() {
         return id;

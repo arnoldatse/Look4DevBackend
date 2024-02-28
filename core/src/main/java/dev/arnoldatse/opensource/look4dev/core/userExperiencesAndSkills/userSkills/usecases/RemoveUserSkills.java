@@ -1,4 +1,4 @@
-package dev.arnoldatse.opensource.look4dev.core.userSkills.usecases;
+package dev.arnoldatse.opensource.look4dev.core.userExperiencesAndSkills.userSkills.usecases;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.Skill;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SimpleSkillResponseDto;
@@ -6,16 +6,17 @@ import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SkillsRequest
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.mappers.MapperSkillToSimpleSkillResponse;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileName;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.ForbiddenException;
-import dev.arnoldatse.opensource.look4dev.core.userSkills.UserSkillRepository;
+import dev.arnoldatse.opensource.look4dev.core.userExperiencesAndSkills.UserExperiencesAndSkillsUseCases;
+import dev.arnoldatse.opensource.look4dev.core.userExperiencesAndSkills.userSkills.UserSkillRepository;
 
 import java.util.List;
 
-public class AddUserSkills extends UserSkillsUseCases {
+public class RemoveUserSkills extends UserExperiencesAndSkillsUseCases {
     private final String userId;
     private final SkillsRequestIdsDto skillsRequestIds;
     private final UserSkillRepository userSkillRepository;
 
-    public AddUserSkills(String userId, List<UserProfileName> userProfileNames, SkillsRequestIdsDto skillsRequestIds, UserSkillRepository userSkillRepository) {
+    public RemoveUserSkills(String userId, List<UserProfileName> userProfileNames, SkillsRequestIdsDto skillsRequestIds, UserSkillRepository userSkillRepository) {
         super(userProfileNames);
         this.userId = userId;
         this.skillsRequestIds = skillsRequestIds;
@@ -23,8 +24,8 @@ public class AddUserSkills extends UserSkillsUseCases {
     }
 
     public List<SimpleSkillResponseDto> execute() throws ForbiddenException {
-        checkUserSkillsActionsAuthorized();
-        List<Skill> skills = userSkillRepository.addUserSkills(userId, skillsRequestIds.ids());
+        checkUserExperiencesAndSkillsActionsAuthorized();
+        List<Skill> skills = userSkillRepository.removeUserSkills(userId, skillsRequestIds.ids());
         return skills.stream().map(skill -> new MapperSkillToSimpleSkillResponse(skill).mapFromSkill()).toList();
     }
 }

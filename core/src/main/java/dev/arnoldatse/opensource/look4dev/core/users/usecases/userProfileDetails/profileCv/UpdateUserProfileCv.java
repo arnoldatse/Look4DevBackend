@@ -3,6 +3,7 @@ package dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetail
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsFileUrlResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.CheckSupportedFileExtension;
+import dev.arnoldatse.opensource.look4dev.core.handleFiles.FileExtensions;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.FailedToStoreFileException;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.adapters.FileStoragePersistAndUrlGetterAdapter;
 import dev.arnoldatse.opensource.look4dev.core.handleFiles.fileStorage.enums.FilesTypesDirectories;
@@ -28,7 +29,7 @@ public class UpdateUserProfileCv<T> {
     }
 
     public UserProfileDetailsFileUrlResponseDto execute() throws FailedToStoreFileException, NotFoundException, FileExtensionNotSupportedException {
-        if (CheckSupportedFileExtension.check(fileExtention, UserProfileCvAuthorizedExtensions.get())){
+        if (CheckSupportedFileExtension.check(fileExtention, FileExtensions.pdf())){
             deleteOldCv();
 
             String fileName = generateFileName();
