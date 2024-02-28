@@ -17,7 +17,8 @@ public class MapperCoreUserSkillToUserSkill implements MapperFromUserSkill<UserS
         return new UserSkill(
                 coreUserSkill.getId(),
                 new MapperCoreUserToUser(coreUserSkill.getUser()).mapFromUser(),
-                new MapperCoreSkillToSkill(coreUserSkill.getSkill()).mapFromSkill()
+                new MapperCoreSkillToSkill(coreUserSkill.getSkill()).mapFromSkill(),
+                coreUserSkill.isFromExperience()
         );
     }
 }

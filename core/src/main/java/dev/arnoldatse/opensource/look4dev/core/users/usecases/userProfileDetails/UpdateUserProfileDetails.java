@@ -1,7 +1,7 @@
 package dev.arnoldatse.opensource.look4dev.core.users.usecases.userProfileDetails;
 
-import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatformRepository;
-import dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository;
+import dev.arnoldatse.opensource.look4dev.core.userUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatformRepository;
+import dev.arnoldatse.opensource.look4dev.core.userUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsUpdateRequestDto;

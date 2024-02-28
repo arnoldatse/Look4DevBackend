@@ -22,6 +22,9 @@ public class UserSkill {
     @JoinColumn(name="skill_id", nullable = false)
     private Skill skill;
 
+    @Column(name = "from_experience", nullable = false, columnDefinition = "boolean default false")
+    private boolean fromExperience;
+
     @Column(name = "created_at")
     @CreationTimestamp
     private Date createdAt;
@@ -29,14 +32,16 @@ public class UserSkill {
     public UserSkill() {
     }
 
-    public UserSkill(String id, User user, Skill skill) {
+    public UserSkill(String id, User user, Skill skill, boolean fromExperience) {
         this.id = id;
         this.user = user;
         this.skill = skill;
+        this.fromExperience = fromExperience;
     }
-    public UserSkill(User user, Skill skill) {
+    public UserSkill(User user, Skill skill, boolean fromExperience) {
         this.user = user;
         this.skill = skill;
+        this.fromExperience = fromExperience;
     }
 
     public String getId() {
@@ -57,6 +62,14 @@ public class UserSkill {
 
     public Skill getSkill() {
         return skill;
+    }
+
+    public boolean isFromExperience() {
+        return fromExperience;
+    }
+
+    public void setFromExperience(boolean fromExperience) {
+        this.fromExperience = fromExperience;
     }
 
     public void setSkill(Skill skill) {
