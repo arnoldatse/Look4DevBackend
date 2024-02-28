@@ -17,6 +17,7 @@ public class MapperUserSkillToCoreUserSkill implements MapperToUserSkill {
         return new dev.arnoldatse.opensource.look4dev.core.entities.userSkill.UserSkill(
                 userSkill.getId(),
                 new MapperUserToCoreUser(userSkill.getUser()).mapToUser(),
+                userSkill.isFromExperience(),
                 new MapperSkillToCoreSkill(userSkill.getSkill()).mapToSkill()
         );
     }

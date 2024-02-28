@@ -1,4 +1,4 @@
-package dev.arnoldatse.opensource.look4dev.core.userSkills.usecases;
+package dev.arnoldatse.opensource.look4dev.core.userExperiencesAndSkills;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfileName;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.ForbiddenException;
@@ -6,12 +6,12 @@ import dev.arnoldatse.opensource.look4dev.core.security.AuthorisationManager;
 
 import java.util.List;
 
-public abstract class UserSkillsUseCases extends AuthorisationManager {
-    protected UserSkillsUseCases(List<UserProfileName> userProfilesNames) {
+public abstract class UserExperiencesAndSkillsUseCases extends AuthorisationManager {
+    protected UserExperiencesAndSkillsUseCases(List<UserProfileName> userProfilesNames) {
         super(List.of(UserProfileName.DEVELOPER), userProfilesNames);
     }
 
-    protected void checkUserSkillsActionsAuthorized() throws ForbiddenException {
+    protected void checkUserExperiencesAndSkillsActionsAuthorized() throws ForbiddenException {
         try {
             checkUserAuthorized();
         } catch (ForbiddenException e) {

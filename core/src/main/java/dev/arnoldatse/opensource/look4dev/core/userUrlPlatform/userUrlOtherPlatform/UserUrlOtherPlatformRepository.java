@@ -1,4 +1,4 @@
-package dev.arnoldatse.opensource.look4dev.core.UserUrlPlatform.userUrlOtherPlatform;
+package dev.arnoldatse.opensource.look4dev.core.userUrlPlatform.userUrlOtherPlatform;
 
 import dev.arnoldatse.opensource.look4dev.core.entities.userUrlPlatform.userUrlOtherPlatform.UserUrlOtherPlatform;
 
