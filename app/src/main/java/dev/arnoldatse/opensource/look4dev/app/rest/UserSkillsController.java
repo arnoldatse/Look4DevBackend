@@ -1,6 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.app.rest;
 
-import dev.arnoldatse.opensource.look4dev.app.userSkills.UserSkillsService;
+import dev.arnoldatse.opensource.look4dev.app.users.userSkills.UserSkillsService;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SimpleSkillResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.skill.dtos.SkillsRequestIdsDto;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.ForbiddenException;

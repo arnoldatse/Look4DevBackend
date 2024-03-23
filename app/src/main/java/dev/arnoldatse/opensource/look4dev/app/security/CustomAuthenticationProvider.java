@@ -6,7 +6,7 @@ import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.entities.userProfile.UserProfile;
 import dev.arnoldatse.opensource.look4dev.core.users.UserPasswordEncoder;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
-import dev.arnoldatse.opensource.look4dev.core.users.usecases.auth.AuthenticationUser;
+import dev.arnoldatse.opensource.look4dev.core.users.auth.usecases.AuthenticationUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -29,7 +29,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     UserPasswordEncoder userPasswordEncoder;
 
     private static final String AUTHENTICATION_ERROR_MESSAGE = "Bad credentials";
-
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

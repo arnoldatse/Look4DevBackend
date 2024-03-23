@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class CoreUserResetPasswordRequestRepositoryImpl implements dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests.UserResetPasswordRequestRepository {
+public class CoreUserResetPasswordRequestRepositoryImpl implements dev.arnoldatse.opensource.look4dev.core.users.userResetPasswordRequests.UserResetPasswordRequestRepository {
     @Autowired
     UserResetPasswordRequestRepository userResetPasswordRequestRepository;
 
