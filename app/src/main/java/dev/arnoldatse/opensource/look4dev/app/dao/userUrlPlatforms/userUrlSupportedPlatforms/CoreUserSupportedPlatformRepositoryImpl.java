@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CoreUserSupportedPlatformRepositoryImpl implements dev.arnoldatse.opensource.look4dev.core.userUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository {
+public class CoreUserSupportedPlatformRepositoryImpl implements dev.arnoldatse.opensource.look4dev.core.users.userUrlPlatform.userUrlSupportedPlatform.UserUrlSupportedPlatformRepository {
     @Autowired
     UserUrlSupportedPlatformRepository userUrlSupportedPlatformRepository;
 

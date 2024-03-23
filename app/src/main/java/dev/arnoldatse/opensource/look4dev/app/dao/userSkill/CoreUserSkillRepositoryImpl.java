@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class CoreUserSkillRepositoryImpl implements dev.arnoldatse.opensource.look4dev.core.userExperiencesAndSkills.userSkills.UserSkillRepository {
+public class CoreUserSkillRepositoryImpl implements dev.arnoldatse.opensource.look4dev.core.users.userExperiencesAndSkills.userSkills.UserSkillRepository {
     private final UserSkillRepository userSkillRepository;
     private final SkillRepository skillRepository;
 

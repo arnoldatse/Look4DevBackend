@@ -1,9 +1,9 @@
 package dev.arnoldatse.opensource.look4dev.app.rest;
 
-import dev.arnoldatse.opensource.look4dev.app.auth.services.UserResetPasswordRequestService;
+import dev.arnoldatse.opensource.look4dev.app.users.auth.UserResetPasswordRequestService;
 import dev.arnoldatse.opensource.look4dev.core.auth.AuthResponse;
 import dev.arnoldatse.opensource.look4dev.core.auth.CredentialsRequest;
-import dev.arnoldatse.opensource.look4dev.app.auth.services.AuthService;
+import dev.arnoldatse.opensource.look4dev.app.users.auth.AuthService;
 import dev.arnoldatse.opensource.look4dev.core.email.FailedToSendEmailException;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserIdToFindRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserRegisterRequestDto;

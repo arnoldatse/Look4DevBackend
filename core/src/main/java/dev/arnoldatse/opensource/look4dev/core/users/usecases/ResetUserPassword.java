@@ -5,11 +5,14 @@ import dev.arnoldatse.opensource.look4dev.core.email.FailedToSendEmailException;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.UserIdToFindRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.http.HttpCode;
 import dev.arnoldatse.opensource.look4dev.core.http.defaultExceptions.NotFoundException;
-import dev.arnoldatse.opensource.look4dev.core.userResetPasswordRequests.*;
 import dev.arnoldatse.opensource.look4dev.core.entities.userResetPasswordRequest.UserResetPasswordRequest;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.User;
 import dev.arnoldatse.opensource.look4dev.core.http.DefaultHttpResponse;
 import dev.arnoldatse.opensource.look4dev.core.users.UserRepository;
+import dev.arnoldatse.opensource.look4dev.core.users.userResetPasswordRequests.usecases.SendUserResetPasswordUrlNotificationByEmail;
+import dev.arnoldatse.opensource.look4dev.core.users.userResetPasswordRequests.usecases.UserResetPasswordExpirationDateGenerator;
+import dev.arnoldatse.opensource.look4dev.core.users.userResetPasswordRequests.usecases.UserResetPasswordIdGenerator;
+import dev.arnoldatse.opensource.look4dev.core.users.userResetPasswordRequests.UserResetPasswordRequestRepository;
 
 import java.util.Date;
 import java.util.Optional;
