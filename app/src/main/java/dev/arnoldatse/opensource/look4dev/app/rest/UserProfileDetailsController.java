@@ -1,6 +1,6 @@
 package dev.arnoldatse.opensource.look4dev.app.rest;
 
-import dev.arnoldatse.opensource.look4dev.app.userProfileDetails.UserProfileDetailsService;
+import dev.arnoldatse.opensource.look4dev.app.users.userProfileDetails.UserProfileDetailsService;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.PasswordUpdateRequestDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsFileUrlResponseDto;
 import dev.arnoldatse.opensource.look4dev.core.entities.user.dtos.userProfileDetailsDto.UserProfileDetailsResponseDto;
